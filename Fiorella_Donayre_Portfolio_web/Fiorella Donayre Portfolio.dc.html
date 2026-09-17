@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="_ds/industry-d8d94d60-cd56-4d44-8e06-f033c1dfe6aa/styles.css">
+<script src="_ds/industry-d8d94d60-cd56-4d44-8e06-f033c1dfe6aa/_ds_bundle.js"></script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--color-bg); overflow-x: hidden; }
+  a { color: var(--color-accent-700); }
+  a:hover { color: var(--color-accent-900); }
+  @keyframes fdMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes fdBlink { 0%, 60% { opacity: 1; } 61%, 100% { opacity: 0.15; } }
+  @keyframes fdDrift { from { background-position: 0 0; } to { background-position: 0 -64px; } }
+</style>
+</helmet>
+
+<div style="position:relative;min-height:100vh;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow:hidden">
+
+  <div style="position:fixed;top:0;left:0;height:2px;width:100%;z-index:60;background:transparent;pointer-events:none">
+    <div ref="{{ progressRef }}" style="height:100%;width:0%;background:var(--color-accent);transition:width .08s linear"></div>
+  </div>
+
+  <div style="position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;background-image:linear-gradient(var(--color-divider) 1px,transparent 1px),linear-gradient(90deg,var(--color-divider) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 100% 70% at 50% 0%,#000 20%,transparent 78%)"></div>
+
+  <nav class="blueprint" style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px clamp(20px,5vw,64px);border-width:0 0 1px 0;background:color-mix(in srgb, var(--color-bg) 88%, transparent);backdrop-filter:blur(10px)">
+    <a href="#top" onClick="{{ goHome }}" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--color-text)">
+      <span class="blueprint" style="display:grid;place-items:center;width:34px;height:34px;font-family:var(--font-heading);font-weight:700;font-size:15px;letter-spacing:.04em;background:var(--color-accent);color:var(--color-bg)">FD</span>
+      <span style="display:flex;flex-direction:column;line-height:1.05">
+        <span style="font-family:var(--font-heading);font-weight:600;font-size:17px;letter-spacing:.02em">FIORELLA DONAYRE</span>
+        <span style="font-family:var(--font-heading);font-size:11px;letter-spacing:.2em;color:var(--color-neutral-600)">SENIOR PRODUCT DESIGNER</span>
+      </span>
+    </a>
+    <div style="display:flex;align-items:center;gap:6px">
+      <a href="#top" onClick="{{ goHome }}" class="btn btn-ghost" style="letter-spacing:.14em;text-transform:uppercase;font-size:12px">Index</a>
+      <a href="#work" onClick="{{ goWork }}" class="btn btn-ghost" style="letter-spacing:.14em;text-transform:uppercase;font-size:12px">Work</a>
+      <a href="#about" onClick="{{ goAbout }}" class="btn btn-ghost" style="letter-spacing:.14em;text-transform:uppercase;font-size:12px">About</a>
+      <a href="mailto:fioredonqui910@gmail.com" class="btn btn-primary blueprint" style="letter-spacing:.14em;text-transform:uppercase;font-size:12px;padding:10px 18px">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        Contact
+      </a>
+    </div>
+  </nav>
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <div>
+
+    <section id="top" style="position:relative;z-index:1;background:var(--color-accent-900);color:var(--color-bg);overflow:hidden">
+      <div style="position:absolute;inset:0;opacity:.16;background-image:linear-gradient(#f2f2f3 1px,transparent 1px),linear-gradient(90deg,#f2f2f3 1px,transparent 1px);background-size:64px 64px;animation:fdDrift 9s linear infinite"></div>
+      <div style="position:relative;max-width:1240px;margin:0 auto;padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px) clamp(40px,6vw,80px);display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,.85fr);gap:clamp(28px,5vw,64px);align-items:end">
+        <div>
+          <div data-reveal="x" style="display:flex;align-items:center;gap:10px;font-family:var(--font-heading);font-size:12px;letter-spacing:.24em;color:var(--color-accent-300);margin-bottom:22px">
+            <span style="display:inline-block;width:7px;height:7px;background:var(--color-accent-300);animation:fdBlink 1.8s steps(1) infinite"></span>
+            TORONTO, ON &nbsp;/&nbsp; OPEN TO SENIOR PRODUCT DESIGN ROLES
+          </div>
+          <h1 data-reveal="y" style="font-size:clamp(46px,8.2vw,112px);line-height:.92;letter-spacing:-.025em;text-transform:uppercase;margin:0 0 26px">
+            Designing clarity<br>into complex<br><span style="color:var(--color-accent-300)">systems</span>
+          </h1>
+          <p data-reveal="y" data-delay="120" style="max-width:620px;font-size:clamp(17px,1.5vw,21px);line-height:1.5;color:var(--color-accent-200);margin:0 0 30px">
+            I'm Fiorella, a senior product designer with seven years spent inside logistics, compliance and workforce platforms. I turn dense operational tools into interfaces teams move through without thinking about them.
+          </p>
+          <div data-reveal="y" data-delay="200" style="display:flex;flex-wrap:wrap;gap:10px">
+            <a href="#work" onClick="{{ goWork }}" class="btn btn-primary blueprint" style="font-size:14px;letter-spacing:.12em;text-transform:uppercase;padding:14px 26px">
+              <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+              View selected work
+            </a>
+            <a href="#about" onClick="{{ goAbout }}" class="btn" style="font-size:14px;letter-spacing:.12em;text-transform:uppercase;padding:14px 26px;border:1px solid var(--color-accent-400);color:var(--color-bg)" style-hover="background:var(--color-accent-800)">About me</a>
+          </div>
+        </div>
+
+        <div data-reveal="y" data-delay="260" class="blueprint" style="border-color:var(--color-accent-600);padding:22px 24px">
+          <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
+          <div style="font-family:var(--font-heading);font-size:11px;letter-spacing:.24em;color:var(--color-accent-300);margin-bottom:16px">SPEC SHEET</div>
+          <sc-for list="{{ specs }}" as="row" hint-placeholder-count="4">
+            <div style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--color-accent-700)">
+              <span style="font-family:var(--font-heading);font-size:13px;letter-spacing:.14em;color:var(--color-accent-300)">{{ row.k }}</span>
+              <span style="font-family:var(--font-heading);font-size:15px;text-align:right;letter-spacing:.02em">{{ row.v }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="overflow:hidden;border-top:1px solid var(--color-accent-700);background:var(--color-accent-800)">
+        <div style="display:flex;width:max-content;animation:fdMarquee 26s linear infinite">
+          <div style="display:flex;gap:44px;padding:12px 22px;font-family:var(--font-heading);font-size:13px;letter-spacing:.24em;color:var(--color-accent-200);white-space:nowrap">
+            <span>UX RESEARCH</span><span>+</span><span>PRODUCT ANALYTICS</span><span>+</span><span>WORKFLOW OPTIMIZATION</span><span>+</span><span>DESIGN SYSTEMS</span><span>+</span><span>WIREFRAMING &amp; PROTOTYPING</span><span>+</span><span>USABILITY TESTING</span><span>+</span><span>SAAS DASHBOARDS</span><span>+</span>
+          </div>
+          <div style="display:flex;gap:44px;padding:12px 22px;font-family:var(--font-heading);font-size:13px;letter-spacing:.24em;color:var(--color-accent-200);white-space:nowrap">
+            <span>UX RESEARCH</span><span>+</span><span>PRODUCT ANALYTICS</span><span>+</span><span>WORKFLOW OPTIMIZATION</span><span>+</span><span>DESIGN SYSTEMS</span><span>+</span><span>WIREFRAMING &amp; PROTOTYPING</span><span>+</span><span>USABILITY TESTING</span><span>+</span><span>SAAS DASHBOARDS</span><span>+</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:clamp(40px,6vw,76px) clamp(20px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--color-divider);border:1px solid var(--color-divider);margin-top:clamp(40px,6vw,76px)">
+      <sc-for list="{{ headline }}" as="m" hint-placeholder-count="4">
+        <div data-reveal="y" data-count="{{ m.n }}" data-suffix="{{ m.suffix }}" style="background:var(--color-bg);padding:26px 22px">
+          <div style="font-family:var(--font-heading);font-size:clamp(34px,4.4vw,56px);line-height:1;color:var(--color-accent-700)">{{ m.value }}</div>
+          <div style="font-family:var(--font-heading);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--color-neutral-600);margin-top:8px">{{ m.label }}</div>
+        </div>
+      </sc-for>
+    </section>
+
+    <section id="work" style="position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:clamp(30px,5vw,60px) clamp(20px,5vw,64px) clamp(50px,7vw,90px)">
+      <div data-reveal="y" style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;border-bottom:1px solid var(--color-divider);padding-bottom:14px;margin-bottom:clamp(28px,4vw,52px)">
+        <h2 style="font-size:clamp(28px,3.4vw,44px);text-transform:uppercase;letter-spacing:-.01em;margin:0">Selected work</h2>
+        <span style="font-family:var(--font-heading);font-size:12px;letter-spacing:.2em;color:var(--color-neutral-600)">03 CASE STUDIES</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:clamp(22px,3.4vw,44px)">
+        <sc-for list="{{ projects }}" as="p" hint-placeholder-count="3">
+          <a href="#case" onClick="{{ p.open }}" data-reveal="y" class="blueprint" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(18px,3vw,40px);align-items:center;padding:clamp(18px,2.6vw,34px);text-decoration:none;color:var(--color-text);transition:background .35s ease,transform .35s ease" style-hover="background:var(--color-accent-100);transform:translateY(-3px)">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <div>
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+                <span style="font-family:var(--font-heading);font-size:clamp(30px,3.4vw,46px);line-height:1;color:var(--color-accent-400)">{{ p.num }}</span>
+                <span style="height:1px;flex:1;background:var(--color-divider)"></span>
+                <span class="tag tag-outline" style="font-size:11px;letter-spacing:.16em">{{ p.client }}</span>
+              </div>
+              <h3 style="font-size:clamp(23px,2.6vw,34px);line-height:1.05;text-transform:uppercase;margin:0 0 12px">{{ p.cardTitle }}</h3>
+              <p style="color:var(--color-neutral-700);margin:0 0 18px;max-width:46ch">{{ p.blurb }}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px">
+                <sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="3">
+                  <span class="tag tag-accent" style="font-size:11px;letter-spacing:.1em">{{ t }}</span>
+                </sc-for>
+              </div>
+              <span style="display:inline-flex;align-items:center;gap:8px;font-family:var(--font-heading);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent-700);border-bottom:1px solid var(--color-accent-400);padding-bottom:3px">Read case study &#8594;</span>
+            </div>
+            <div class="duotone blueprint" style="aspect-ratio:16/10;background:var(--color-accent-100)">
+              <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+              <img src="{{ p.thumb }}" alt="{{ p.cardTitle }}" style="width:100%;height:100%;object-fit:cover;object-position:top center">
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section id="about" style="position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,64px) clamp(50px,7vw,90px);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,56px);align-items:start">
+      <div data-reveal="x" class="duotone blueprint" style="aspect-ratio:4/5;background:var(--color-accent-100)">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <img src="https://fiorelladonayre.com/resources/img/about_1.png" alt="Fiorella Donayre" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div data-reveal="y">
+        <div style="font-family:var(--font-heading);font-size:12px;letter-spacing:.24em;color:var(--color-accent-700);margin-bottom:14px">ABOUT / 00</div>
+        <h2 style="font-size:clamp(28px,3.6vw,48px);text-transform:uppercase;line-height:1;margin:0 0 20px">Behind the screens</h2>
+        <p style="font-size:clamp(16px,1.3vw,19px);color:var(--color-neutral-800);margin:0 0 16px">Based in Toronto, I design solutions that streamline workflows, strengthen compliance and simplify complex processes, using data and analytics to help teams make faster, better decisions.</p>
+        <p style="color:var(--color-neutral-700);margin:0 0 26px">Most of my work lives in the unglamorous middle of a business: shipment queues, asset inventories, hiring compliance. Those are the places where a clearer interface saves hours a day.</p>
+        <a href="#about" onClick="{{ goAbout }}" class="btn btn-secondary blueprint" style="letter-spacing:.14em;text-transform:uppercase;font-size:13px;padding:13px 22px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          More about me
+        </a>
+      </div>
+    </section>
+
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+  <div style="position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:clamp(40px,6vw,86px) clamp(20px,5vw,64px) clamp(50px,7vw,90px)">
+    <div data-reveal="x" style="font-family:var(--font-heading);font-size:12px;letter-spacing:.24em;color:var(--color-accent-700);margin-bottom:16px">ABOUT / FIORELLA DONAYRE</div>
+    <h1 data-reveal="y" style="font-size:clamp(42px,7vw,96px);line-height:.94;text-transform:uppercase;margin:0 0 clamp(28px,4vw,50px)">Behind<br>the screens</h1>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);align-items:start">
+      <div data-reveal="x" class="duotone blueprint" style="aspect-ratio:4/5;position:sticky;top:110px;background:var(--color-accent-100)">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <img src="https://fiorelladonayre.com/resources/img/about_1.png" alt="Fiorella Donayre" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div>
+        <h2 data-reveal="y" style="font-size:clamp(24px,2.6vw,34px);text-transform:uppercase;margin:0 0 18px">Hey, I'm Fiore</h2>
+        <p data-reveal="y" style="font-size:clamp(17px,1.4vw,20px);color:var(--color-neutral-800);margin:0 0 16px">I'm a product and interaction designer based in Toronto, focused on creating intuitive digital experiences that balance user needs with business goals. I enjoy turning research, ideas and prototypes into products that feel clear, functional and thoughtfully designed.</p>
+        <p data-reveal="y" style="color:var(--color-neutral-700);margin:0 0 16px">I love making digital experiences that not only look great but actually work for people. Whether it's simplifying a complex workflow or giving a tired interface a fresh personality, I design solutions that feel human and meaningful.</p>
+        <p data-reveal="y" style="color:var(--color-neutral-700);margin:0 0 34px">And when I'm not designing, you'll find me experimenting with new dessert ideas, trying recipes in the kitchen, or sketching whatever concept is inspiring me next.</p>
+
+        <div data-reveal="y" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--color-divider);border:1px solid var(--color-divider)">
+          <sc-for list="{{ capabilities }}" as="c" hint-placeholder-count="4">
+            <div style="background:var(--color-bg);padding:22px 20px">
+              <div style="font-family:var(--font-heading);font-size:12px;letter-spacing:.2em;color:var(--color-accent-700);margin-bottom:8px">{{ c.k }}</div>
+              <div style="font-size:15px;color:var(--color-neutral-700)">{{ c.v }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isCase }}" hint-placeholder-val="{{ false }}">
+  <div style="position:relative;z-index:1">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(30px,4vw,56px) clamp(20px,5vw,64px) 0">
+      <a href="#work" onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:8px;font-family:var(--font-heading);font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--color-neutral-600)">&#8592; All work</a>
+    </div>
+
+    <header style="max-width:1240px;margin:0 auto;padding:clamp(20px,3vw,34px) clamp(20px,5vw,64px) clamp(28px,4vw,48px)">
+      <div data-reveal="x" style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+        <span style="font-family:var(--font-heading);font-size:clamp(28px,3.4vw,44px);line-height:1;color:var(--color-accent-400)">{{ cs.num }}</span>
+        <span class="tag tag-outline" style="font-size:11px;letter-spacing:.16em">{{ cs.client }}</span>
+        <span class="tag tag-neutral" style="font-size:11px;letter-spacing:.16em">{{ cs.timeline }}</span>
+      </div>
+      <h1 data-reveal="y" style="font-size:clamp(34px,5.4vw,76px);line-height:.98;text-transform:uppercase;margin:0;max-width:20ch">{{ cs.title }}</h1>
+    </header>
+
+    <div data-reveal="y" class="duotone blueprint" style="max-width:1240px;margin:0 auto clamp(34px,5vw,64px);background:var(--color-accent-100)">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <img src="{{ cs.hero }}" alt="{{ cs.title }}" style="width:100%;display:block">
+    </div>
+
+    <section style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,64px) clamp(34px,5vw,64px);display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.9fr);gap:clamp(24px,4vw,56px);align-items:start">
+      <div data-reveal="y">
+        <div style="font-family:var(--font-heading);font-size:12px;letter-spacing:.24em;color:var(--color-accent-700);margin-bottom:14px">PROJECT OVERVIEW</div>
+        <sc-for list="{{ cs.overview }}" as="para" hint-placeholder-count="3">
+          <p style="font-size:clamp(16px,1.25vw,19px);color:var(--color-neutral-800);margin:0 0 14px">{{ para }}</p>
+        </sc-for>
+      </div>
+      <div data-reveal="y" class="blueprint" style="padding:22px 24px">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div style="font-family:var(--font-heading);font-size:11px;letter-spacing:.24em;color:var(--color-neutral-600);margin-bottom:14px">ROLE</div>
+        <p style="margin:0 0 20px;color:var(--color-neutral-800)">{{ cs.role }}</p>
+        <div style="font-family:var(--font-heading);font-size:11px;letter-spacing:.24em;color:var(--color-neutral-600);margin-bottom:6px;border-top:1px solid var(--color-divider);padding-top:16px">TIMELINE</div>
+        <p style="margin:0;font-family:var(--font-heading);font-size:24px">{{ cs.timeline }}</p>
+      </div>
+    </section>
+
+    <section style="background:var(--color-accent-900);color:var(--color-bg)">
+      <div style="max-width:1240px;margin:0 auto;padding:clamp(40px,6vw,80px) clamp(20px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(26px,4vw,56px)">
+        <div data-reveal="y">
+          <div style="font-family:var(--font-heading);font-size:12px;letter-spacing:.24em;color:var(--color-accent-300);margin-bottom:14px">{{ cs.problemLabel }}</div>
+          <p style="font-size:clamp(17px,1.5vw,21px);line-height:1.45;margin:0;color:var(--color-accent-100)">{{ cs.problem }}</p>
+        </div>
+        <div data-reveal="y" data-delay="120">
+          <div style="font-family:var(--font-heading);font-size:12px;letter-spacing:.24em;color:var(--color-accent-300);margin-bottom:14px">SOLUTION</div>
+          <p style="font-size:clamp(17px,1.5vw,21px);line-height:1.45;margin:0 0 14px;color:var(--color-accent-100)">{{ cs.solutionLead }}</p>
+          <p style="margin:0;color:var(--color-accent-200)">{{ cs.solution }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1240px;margin:0 auto;padding:clamp(40px,6vw,80px) clamp(20px,5vw,64px);display:flex;flex-direction:column;gap:clamp(20px,3vw,40px)">
+      <sc-for list="{{ cs.gallery }}" as="g" hint-placeholder-count="3">
+        <figure data-reveal="y" class="blueprint" style="padding:0">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="{{ g }}" alt="Interface detail" style="width:100%;display:block">
+        </figure>
+      </sc-for>
+    </section>
+
+    <section style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,64px) clamp(50px,7vw,90px)">
+      <div data-reveal="y" style="font-family:var(--font-heading);font-size:12px;letter-spacing:.24em;color:var(--color-accent-700);margin-bottom:14px">OUTCOME</div>
+      <h2 data-reveal="y" style="font-size:clamp(26px,3.2vw,42px);line-height:1.05;text-transform:uppercase;margin:0 0 22px;max-width:24ch">{{ cs.outcomeLead }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--color-divider);border:1px solid var(--color-divider);margin-bottom:26px">
+        <sc-for list="{{ cs.stats }}" as="s" hint-placeholder-count="3">
+          <div data-reveal="y" style="background:var(--color-bg);padding:26px 22px">
+            <div style="font-family:var(--font-heading);font-size:clamp(32px,4vw,52px);line-height:1;color:var(--color-accent-700)">{{ s.v }}</div>
+            <div style="font-family:var(--font-heading);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--color-neutral-600);margin-top:8px">{{ s.l }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <sc-for list="{{ cs.outcome }}" as="para" hint-placeholder-count="2">
+        <p data-reveal="y" style="max-width:74ch;color:var(--color-neutral-800);margin:0 0 14px">{{ para }}</p>
+      </sc-for>
+
+      <div data-reveal="y" style="margin-top:clamp(30px,4vw,54px);border-top:1px solid var(--color-divider);padding-top:22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px">
+        <span style="font-family:var(--font-heading);font-size:12px;letter-spacing:.2em;color:var(--color-neutral-600)">NEXT CASE STUDY</span>
+        <a href="#case" onClick="{{ nextCase }}" style="display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--color-text);font-family:var(--font-heading);font-size:clamp(22px,2.6vw,34px);text-transform:uppercase">{{ nextTitle }} &#8594;</a>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <footer style="position:relative;z-index:1;background:var(--color-accent-900);color:var(--color-bg);overflow:hidden">
+    <div style="position:absolute;inset:0;opacity:.14;background-image:linear-gradient(90deg,#f2f2f3 1px,transparent 1px);background-size:64px 64px"></div>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:clamp(44px,6vw,86px) clamp(20px,5vw,64px)">
+      <div style="font-family:var(--font-heading);font-size:12px;letter-spacing:.24em;color:var(--color-accent-300);margin-bottom:18px">CONTACT</div>
+      <h2 style="font-size:clamp(34px,6vw,84px);line-height:.96;text-transform:uppercase;margin:0 0 26px">Let's get<br>in touch</h2>
+      <a href="mailto:fioredonqui910@gmail.com" style="display:inline-block;font-family:var(--font-heading);font-size:clamp(20px,2.4vw,32px);color:var(--color-accent-200);text-decoration:none;border-bottom:1px solid var(--color-accent-600);padding-bottom:4px" style-hover="color:#fff;border-color:#fff">fioredonqui910@gmail.com</a>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:34px">
+        <a href="https://www.behance.net/fioree910" target="_blank" rel="noopener" class="btn blueprint" style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:12px 20px;border:1px solid var(--color-accent-600);color:var(--color-bg)" style-hover="background:var(--color-accent-800)">
+          <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
+          Behance
+        </a>
+        <a href="https://www.linkedin.com/in/fiorella-donayre-quinones/" target="_blank" rel="noopener" class="btn blueprint" style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:12px 20px;border:1px solid var(--color-accent-600);color:var(--color-bg)" style-hover="background:var(--color-accent-800)">
+          <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
+          LinkedIn
+        </a>
+      </div>
+      <div style="margin-top:clamp(36px,5vw,64px);border-top:1px solid var(--color-accent-700);padding-top:18px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-family:var(--font-heading);font-size:12px;letter-spacing:.18em;color:var(--color-accent-400)">
+        <span>&copy; 2025 FIORELLA DONAYRE</span>
+        <span>ALL RIGHTS RESERVED</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+const PROJECTS = [
+  {
+    id: 'ecom', num: '01', client: 'Ecom Logistics', timeline: '4 Months',
+    cardTitle: 'Streamlining logistics workflows seamlessly',
+    title: 'Revamp operational efficiency for logistics and fulfillment teams',
+    blurb: 'Rebuilt scalable logistics workflows to refine daily operations and lift cross-team effectiveness.',
+    tags: ['UX Research', 'Product Architecture', 'Workflow Optimization'],
+    thumb: 'https://fiorelladonayre.com/resources/img/project_ecom_1.png',
+    hero: 'https://fiorelladonayre.com/resources/img/project_ecom_4.png',
+    gallery: [
+      'https://fiorelladonayre.com/resources/img/project_ecom_5.png',
+      'https://fiorelladonayre.com/resources/img/project_ecom_3.png',
+      'https://fiorelladonayre.com/resources/img/project_ecom_2.png'
+    ],
+    role: 'UX Research, Product Architecture, Workflow Optimization, Wireframing & Prototyping, Cross-Functional Collaboration, Solution Design',
+    overview: [
+      'Ecom Logistics is a logistics company that relies on a platform used by operations, sales and finance teams to manage shipments, orders, billing and daily logistics activities.',
+      'Although the platform was powerful, it was difficult to use; key tasks required too many steps, which slowed down operations in a fast-paced environment.',
+      'The project focused on streamlining workflows, improving visibility and reducing time on essential tasks, enabling teams to work more efficiently and make fewer errors.'
+    ],
+    problemLabel: 'PROBLEM',
+    problem: 'The platform was confusing and not user-friendly, making it difficult for operations, sales and finance teams to manage shipments, orders and billing efficiently. This led to slow workflows, limited visibility and a higher risk of errors across the organization.',
+    solutionLead: 'A centralized platform that simplified shipment, order and billing management, aligning with the needs of both internal and external users while meeting the company\u2019s business objectives.',
+    solution: 'The improvements included simplified navigation and clearer interaction patterns. By mapping real user journeys and validating solutions through interviews and usability testing, the platform became more intuitive, efficient and user-friendly for all teams.',
+    outcomeLead: 'Improved operational efficiency, fewer errors, and major growth through a streamlined experience.',
+    stats: [
+      { v: '136%', l: 'increase in adoption' },
+      { v: '40%', l: 'less task completion time' },
+      { v: '50%', l: 'boost in visibility' }
+    ],
+    outcome: [
+      'By streamlining workflows and improving platform usability, I enhanced operational clarity, which led to a 136% increase in adoption, a 40% reduction in task completion time and a 50% boost in overall visibility.',
+      'These improvements eliminated a $10K annual third-party cost and enabled the company to achieve ROI in 1.5 years, while annual sales grew from $100K to $1M in the first full year.'
+    ]
+  },
+  {
+    id: 'corein', num: '02', client: 'Corein', timeline: '6 Months',
+    cardTitle: 'Simplifying teamwork and operations',
+    title: 'Simplifying teamwork and operations across 5,000 devices',
+    blurb: 'Designed user-centered workflows to streamline operations and improve cross-functional efficiency.',
+    tags: ['UX Research', 'Design System', 'High-Fidelity UI'],
+    thumb: 'https://fiorelladonayre.com/resources/img/project_corein_1.png',
+    hero: 'https://fiorelladonayre.com/resources/img/project_corein_2_crop_v2.png',
+    gallery: [
+      'https://fiorelladonayre.com/resources/img/project_corein_3_v2.png',
+      'https://fiorelladonayre.com/resources/img/project_corein_4_v3.png',
+      'https://fiorelladonayre.com/resources/img/project_corein_5_v2.png'
+    ],
+    role: 'Conducting UX research, user testing and data analysis, developing the design system, creating high-fidelity prototypes and UI visuals.',
+    overview: [
+      'Corein is a software designed to manage over 5,000 laptops, improving inventory tracking and reducing delays. It provides real-time access to data, enhancing efficiency and communication across departments.',
+      'The platform simplifies workflows with an intuitive interface, automating tracking and centralizing data to improve productivity and reduce errors.'
+    ],
+    problemLabel: 'PROBLEM',
+    problem: 'Inefficient management of over 5,000 laptops, leading to delays, lack of transparency, and difficulty maintaining compliance and accountability across departments.',
+    solutionLead: 'A centralized platform that optimizes laptop management, ensures compliance and enhances cross-departmental communication.',
+    solution: 'Real-time tracking and automated updates keep records compliant and departments in sync. The platform streamlines workflows, reduces delays and boosts accountability while holding to the efficiency and regulatory standards common in the financial sector.',
+    outcomeLead: 'Faster deliveries and better decisions through clearer data and accountability.',
+    stats: [
+      { v: '30%', l: 'faster task completion' },
+      { v: '25%', l: 'rise in user satisfaction' },
+      { v: '5,000+', l: 'devices managed' }
+    ],
+    outcome: [
+      'The platform increased task completion speed by 30%, resulting in a 25% rise in user satisfaction. Its simplified workflows and intuitive design helped teams work more efficiently, aligning with usability standards seen in financial platforms.'
+    ]
+  },
+  {
+    id: 'vrfi', num: '03', client: 'VRFI', timeline: '4 Months',
+    cardTitle: 'Optimizing workforce compliance and recruitment',
+    title: 'Optimizing workforce compliance and recruitment',
+    blurb: 'Compliance-focused interfaces that simplify hiring and give employers real transparency.',
+    tags: ['MVP Definition', 'Wireframing', 'SaaS UI'],
+    thumb: 'https://fiorelladonayre.com/resources/img/project_vrfi_1.png',
+    hero: 'https://fiorelladonayre.com/resources/img/project_vrfi_2_v2.png',
+    gallery: [
+      'https://fiorelladonayre.com/resources/img/project_vrfi_3_v2.png',
+      'https://fiorelladonayre.com/resources/img/project_vrfi_4_v3.png',
+      'https://fiorelladonayre.com/resources/img/project_vrfi_5_v2.png'
+    ],
+    role: 'Defining the MVP structure, wireframing key flows, and designing high-fidelity UI for scalable, user-centered solutions.',
+    overview: [
+      'VRFI is a SaaS recruitment platform that helps employers manage short-term hiring across multiple agencies with greater visibility and compliance. It brings structure to a complex process through clear, centralized oversight.',
+      'The design focused on making the experience intuitive and transparent for all users, improving efficiency in fast-paced industries while supporting the standards expected in financial and regulatory environments.'
+    ],
+    problemLabel: 'OPPORTUNITY',
+    problem: 'A gap in the market for a streamlined, compliance-first hiring platform that gives employers real-time visibility and control over their short-term workforce.',
+    solutionLead: 'A compliance-driven platform that streamlines hiring and gives every stakeholder more control and transparency.',
+    solution: 'A centralized SaaS platform designed to simplify short-term hiring by offering full workforce visibility, automated compliance checks and seamless coordination between employers, agencies and candidates.',
+    outcomeLead: 'Less time to hire and fewer compliance issues across every agency.',
+    stats: [
+      { v: '30%', l: 'cut in hiring time' },
+      { v: '40%', l: 'fewer compliance issues' },
+      { v: '3', l: 'stakeholder groups aligned' }
+    ],
+    outcome: [
+      'By streamlining workflows and automating compliance checks, the platform cut hiring time by 30% and reduced compliance issues by 40%, improving the overall efficiency and transparency of the process for both employers and agencies.'
+    ]
+  }
+];
+
+class Component extends DCLogic {
+  state = { route: 'home', pid: 'ecom' };
+
+  go = (route, pid) => (e) => {
+    if (e) e.preventDefault();
+    this.setState({ route, pid: pid || this.state.pid });
+    if (route === 'work') {
+      this.setState({ route: 'home' }, () => this.scrollToWork());
+    } else {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+  };
+
+  scrollToWork() {
+    const el = document.getElementById('work');
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior: 'smooth' });
+  }
+
+  componentDidMount() {
+    this.setupReveal();
+    this._onScroll = () => {
+      const p = this.progressRef;
+      if (!p) return;
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      p.style.width = (h > 0 ? Math.min(100, (window.scrollY / h) * 100) : 0) + '%';
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+  }
+
+  componentDidUpdate(pp, ps) {
+    if (ps.route !== this.state.route || ps.pid !== this.state.pid) this.setupReveal();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    if (this._io) this._io.disconnect();
+  }
+
+  setupReveal() {
+    clearTimeout(this._t);
+    this._t = setTimeout(() => {
+      const els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+      if (this._io) this._io.disconnect();
+      if (typeof IntersectionObserver === 'undefined') {
+        els.forEach((el) => { el.style.opacity = '1'; el.style.transform = 'none'; });
+        return;
+      }
+      this._io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (!en.isIntersecting) return;
+          const el = en.target;
+          const d = parseInt(el.getAttribute('data-delay') || '0', 10);
+          setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            if (el.getAttribute('data-count')) this.count(el);
+          }, d);
+          this._io.unobserve(el);
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+      els.forEach((el) => {
+        el.style.willChange = 'opacity, transform';
+        el.style.opacity = '0';
+        el.style.transform = el.getAttribute('data-reveal') === 'x' ? 'translateX(-20px)' : 'translateY(30px)';
+        el.style.transition = 'opacity .75s cubic-bezier(.2,.7,.2,1), transform .75s cubic-bezier(.2,.7,.2,1)';
+        this._io.observe(el);
+      });
+    }, 60);
+  }
+
+  count(el) {
+    const target = parseFloat(el.getAttribute('data-count'));
+    const suffix = el.getAttribute('data-suffix') || '';
+    const node = el.firstElementChild;
+    if (!node || isNaN(target)) return;
+    const start = performance.now();
+    const dur = 1100;
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / dur);
+      const e = 1 - Math.pow(1 - t, 3);
+      node.textContent = Math.round(target * e).toLocaleString() + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  renderVals() {
+    const route = this.state.route;
+    const cs = PROJECTS.find((p) => p.id === this.state.pid) || PROJECTS[0];
+    const idx = PROJECTS.indexOf(cs);
+    const next = PROJECTS[(idx + 1) % PROJECTS.length];
+    return {
+      isHome: route === 'home',
+      isAbout: route === 'about',
+      isCase: route === 'case',
+      goHome: this.go('home'),
+      goAbout: this.go('about'),
+      goWork: this.go('work'),
+      nextCase: this.go('case', next.id),
+      nextTitle: next.cardTitle,
+      cs,
+      projects: PROJECTS.map((p) => Object.assign({}, p, { open: this.go('case', p.id) })),
+      progressRef: (el) => { this.progressRef = el; },
+      specs: [
+        { k: 'EXPERIENCE', v: '7+ years' },
+        { k: 'BASED IN', v: 'Toronto, Canada' },
+        { k: 'FOCUS', v: 'B2B platforms & dashboards' },
+        { k: 'METHODS', v: 'Research, analytics, systems' },
+        { k: 'STATUS', v: 'Open to new roles' }
+      ],
+      headline: [
+        { value: '7+', n: 7, suffix: '+', label: 'Years designing' },
+        { value: '136%', n: 136, suffix: '%', label: 'Adoption lift, Ecom' },
+        { value: '40%', n: 40, suffix: '%', label: 'Less time on task' },
+        { value: '5,000+', n: 5000, suffix: '+', label: 'Assets tracked, Corein' }
+      ],
+      capabilities: [
+        { k: 'RESEARCH', v: 'Interviews, usability testing, journey mapping' },
+        { k: 'ANALYTICS', v: 'Turning product data into design decisions' },
+        { k: 'SYSTEMS', v: 'Design systems and scalable component libraries' },
+        { k: 'DELIVERY', v: 'Wireframes, prototypes, hand-off with engineering' }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

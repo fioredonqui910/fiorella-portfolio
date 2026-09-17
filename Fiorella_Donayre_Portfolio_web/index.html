@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fiorella Donayre — Senior Product Designer</title>
+<meta name="description" content="Senior Product Designer based in Toronto. SaaS platforms, operational tools and data-informed experiences.">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -22,6 +24,29 @@
   @keyframes sheen { 0%,100% { background-position: 120% 0; } 55% { background-position: -20% 0; } }
   .sheen { background-image: linear-gradient(100deg, currentColor 42%, rgba(84,46,235,.75) 50%, currentColor 58%); background-size: 260% 100%; background-position: 120% 0; -webkit-background-clip: text; background-clip: text; color: inherit; -webkit-text-fill-color: transparent; animation: sheen 3s ease-in-out infinite; }
   @media (prefers-reduced-motion: reduce) { .sheen { animation: none; -webkit-text-fill-color: currentColor; } }
+  @media (max-width: 880px) {
+    .nav { justify-content: space-between !important; gap: 12px !important; }
+    .burger { display: inline-flex !important; order: 3; }
+    .langsw { order: 1; }
+    .navlinks { display: none !important; }
+    .navlinks-open {
+      display: flex !important; flex-direction: column; align-items: flex-start !important;
+      position: absolute; top: calc(100% + 8px); left: 0; right: 0;
+      background: rgba(255,253,254,.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,0,0,.08); border-radius: 16px; padding: 14px 18px;
+      gap: 14px !important; box-shadow: 0 18px 40px rgba(26,26,31,.14);
+    }
+    .navlinks-open a { font-size: 17px !important; }
+    .g2 { grid-template-columns: 1fr !important; }
+    .glab { grid-template-columns: 1fr !important; gap: 10px !important; }
+    .pcard { grid-template-columns: 1fr !important; }
+    .pcard .pmedia { order: -1; }
+    .stickyimg { position: static !important; max-width: 420px; }
+  }
+  @media (max-width: 560px) {
+    .stack-sm { flex-direction: column !important; align-items: stretch !important; }
+    .stack-sm > a { text-align: center; }
+  }
   .disp { font-family: Archivo, "Helvetica Neue", Helvetica, sans-serif; font-weight: 800; line-height: 0.98; letter-spacing: -0.035em; }
 </style>
 <script src="./image-slot.js"></script>
@@ -32,12 +57,21 @@
   <div style="position:absolute;top:0;left:0;right:0;height:min(680px,80vh);pointer-events:none;z-index:0;background-image:linear-gradient(160deg, rgba(84,46,235,.34) 0%, rgba(84,46,235,.16) 22%, rgba(230,232,255,.5) 44%, rgba(255,253,254,0) 72%),radial-gradient(55% 46% at 88% 0%, rgba(84,46,235,.28) 0%, rgba(255,253,254,0) 70%),radial-gradient(60% 40% at 18% 2%, rgba(230,232,255,.85) 0%, rgba(255,253,254,0) 72%);filter:blur(16px);mask-image:linear-gradient(to bottom, #000 0%, #000 34%, transparent 82%);-webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 34%, transparent 82%)"></div>
 
   <div style="position:sticky;top:0;z-index:40;padding:12px clamp(14px,4vw,40px)">
-  <nav ref="{{ navRef }}" style="display:flex;align-items:center;justify-content:center;gap:24px;max-width:1180px;margin:0 auto;padding:12px clamp(16px,3vw,28px);border-radius:16px;border:1px solid transparent;transition:background .3s ease, border-color .3s ease, box-shadow .3s ease">
-    <div style="display:flex;align-items:center;gap:clamp(14px,2.4vw,30px)">
-      <a href="#top" onClick="{{ goHome }}" style="text-decoration:none;color:#000;font-size:15px" style-hover="color:#542eeb">Home</a>
-      <a href="#projects" onClick="{{ goWork }}" style="text-decoration:none;color:#000;font-size:15px" style-hover="color:#542eeb">Projects</a>
-      <a href="#about" onClick="{{ goAbout }}" style="text-decoration:none;color:#000;font-size:15px" style-hover="color:#542eeb">About</a>
-      <a href="mailto:fioredonqui910@gmail.com" style="text-decoration:none;font-size:15px;color:#fffdfe;background:#542eeb;padding:9px 18px;border-radius:999px" style-hover="background:#3a1eb0">Contact</a>
+  <nav ref="{{ navRef }}" class="nav" style="position:relative;display:flex;align-items:center;justify-content:center;gap:24px;max-width:1180px;margin:0 auto;padding:12px clamp(16px,3vw,28px);border-radius:16px;border:1px solid transparent;transition:background .3s ease, border-color .3s ease, box-shadow .3s ease">
+    <button type="button" class="burger" onClick="{{ toggleMenu }}" aria-label="Menu" aria-expanded="{{ menuOpen }}" style="display:none;align-items:center;justify-content:center;width:38px;height:38px;padding:0;border:1px solid rgba(0,0,0,.16);background:transparent;border-radius:12px;cursor:pointer" style-hover="background:#e6e8ff;border-color:#e6e8ff">
+      <span style="{{ burgerTop }}"></span>
+      <span style="{{ burgerMid }}"></span>
+      <span style="{{ burgerBot }}"></span>
+    </button>
+    <div class="{{ navLinksClass }}" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(10px,2.4vw,30px)">
+      <a href="#top" onClick="{{ goHomeMenu }}" style="text-decoration:none;color:#000;font-size:15px" style-hover="color:#542eeb">{{ t.home }}</a>
+      <a href="#projects" onClick="{{ goWorkMenu }}" style="text-decoration:none;color:#000;font-size:15px" style-hover="color:#542eeb">{{ t.projects }}</a>
+      <a href="#about" onClick="{{ goAboutMenu }}" style="text-decoration:none;color:#000;font-size:15px" style-hover="color:#542eeb">{{ t.about }}</a>
+      <a href="mailto:fioredonqui910@gmail.com" onClick="{{ closeMenu }}" style="text-decoration:none;color:#000;font-size:15px" style-hover="color:#542eeb">{{ t.contact }}</a>
+    </div>
+    <div role="group" aria-label="Language" class="langsw" style="display:flex;align-items:center;gap:2px;background:#542eeb;border-radius:999px;padding:2px">
+      <button type="button" onClick="{{ setEn }}" aria-pressed="{{ isEn }}" style="{{ enStyle }}">EN</button>
+      <button type="button" onClick="{{ setEs }}" aria-pressed="{{ isEs }}" style="{{ esStyle }}">ES</button>
     </div>
   </nav>
   </div>
@@ -45,27 +79,27 @@
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
   <div style="position:relative;z-index:1">
     <section id="top" style="position:relative;overflow:hidden">
-      <div style="position: relative; max-width: 1180px; margin: 0 auto; padding: clamp(64px,11vw,150px) clamp(20px,6vw,72px) clamp(56px,9vw,130px); display: flex; flex-direction: column; align-items: center; text-align: center; padding-bottom: clamp(44px,9vw,130px)">
-      <div data-reveal="y" style="font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#542eeb;margin-bottom:22px">UX Strategy • Product Design • Data-informed Design</div>
-      <h1 data-reveal="y" class="disp" style="font-size:clamp(46px,8vw,104px);margin:0 0 28px;max-width:16ch">Hi, I'm Fiorella</h1>
-      <p data-reveal="y" data-delay="100" style="font-size:clamp(19px,2vw,27px);line-height:1.35;max-width:50ch;text-wrap:balance;margin:0 0 26px">I design digital products that turn <span class="sheen">complex workflows</span> into clear, scalable experiences.</p>
-      <p data-reveal="y" data-delay="160" style="max-width:88ch;text-wrap:balance;color:rgba(0,0,0,.66);margin:0 0 34px">Senior Product Designer based in Toronto with 7+ years of experience designing SaaS platforms, operational tools and data-informed experiences.</p>
-      <div data-reveal="y" data-delay="220" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px">
-        <a href="#projects" onClick="{{ goWork }}" style="text-decoration:none;background:#542eeb;color:#fffdfe;padding:14px 26px;border-radius:999px;font-size:16px" style-hover="background:#3a1eb0">See my work</a>
-        <a href="#about" onClick="{{ goAbout }}" style="text-decoration:none;color:#000;padding:14px 26px;border-radius:999px;font-size:16px;border:1px solid rgba(0,0,0,.18)" style-hover="background:#e6e8ff;border-color:#e6e8ff">About me</a>
+      <div style="position: relative; max-width: 1180px; margin: 0 auto; padding: clamp(64px,11vw,150px) clamp(20px,6vw,72px) clamp(56px,9vw,130px); display: flex; flex-direction: column; align-items: center; text-align: center; padding-bottom: clamp(36px,6vw,80px)">
+      <div data-reveal="y" style="font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#542eeb;margin-bottom:22px">{{ t.heroEyebrow }}</div>
+      <h1 data-reveal="y" class="disp" style="font-size:clamp(46px,8vw,104px);margin:0 0 28px;max-width:16ch">{{ t.heroTitle }}</h1>
+      <p data-reveal="y" data-delay="100" style="font-size:clamp(19px,2vw,27px);line-height:1.45;max-width:50ch;text-wrap:balance;margin:0 0 26px">{{ t.heroLeadA }}<span class="sheen">{{ t.heroLeadB }}</span>{{ t.heroLeadC }}</p>
+      <p data-reveal="y" data-delay="160" style="max-width:88ch;text-wrap:balance;color:rgba(0,0,0,.66);margin:0 0 34px">{{ t.heroSub }}</p>
+      <div data-reveal="y" data-delay="220" class="stack-sm" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px">
+        <a href="#projects" onClick="{{ goWork }}" style="text-decoration:none;background:#542eeb;color:#fffdfe;padding:14px 26px;border-radius:999px;font-size:16px" style-hover="background:#3a1eb0">{{ t.ctaWork }}</a>
+        <a href="#about" onClick="{{ goAbout }}" style="text-decoration:none;color:#000;padding:14px 26px;border-radius:999px;font-size:16px;border:1px solid rgba(0,0,0,.18)" style-hover="background:#e6e8ff;border-color:#e6e8ff">{{ t.ctaAbout }}</a>
       </div>
       </div>
     </section>
 
-    <section id="projects" style="max-width: 1180px; margin: 0 auto; padding: clamp(52px,8vw,110px) clamp(20px,6vw,72px) clamp(40px,6vw,80px); padding-top: clamp(36px,8vw,110px); padding-bottom: clamp(36px,8vw,110px)">
+    <section id="projects" style="max-width: 1180px; margin: 0 auto; padding: clamp(52px,8vw,110px) clamp(20px,6vw,72px) clamp(40px,6vw,80px); padding-top: clamp(36px,6vw,80px); padding-bottom: clamp(36px,6vw,80px)">
       <div data-reveal="y" style="margin-bottom:clamp(28px,4vw,52px)">
-        <div style="font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-bottom:10px">SELECTED WORK</div>
-        <h2 class="disp" style="font-size:clamp(30px,3.8vw,50px);margin:0">Projects</h2>
+        <div style="font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-bottom:10px">{{ t.selectedWork }}</div>
+        <h2 class="disp" style="font-size:clamp(30px,3.8vw,50px);margin:0">{{ t.projectsTitle }}</h2>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:clamp(28px,4vw,56px)">
         <sc-for list="{{ projects }}" as="p" hint-placeholder-count="3">
-          <a href="#case" onClick="{{ p.open }}" data-reveal="y" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(20px,3.5vw,48px);align-items:center;text-decoration:none;color:#000;padding:clamp(18px,2.4vw,30px);border-radius:18px;transition:background .35s ease,transform .35s ease" style-hover="background:#e6e8ff;transform:translateY(-3px)">
+          <a href="#case" onClick="{{ p.open }}" data-reveal="y" class="pcard" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(20px,3.5vw,48px);align-items:center;text-decoration:none;color:#000;padding:clamp(18px,2.4vw,30px);border-radius:18px;transition:background .35s ease,transform .35s ease" style-hover="background:#e6e8ff;transform:translateY(-3px)">
             <div>
               <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:14px">{{ p.num }} &nbsp;/&nbsp; {{ p.client }}</div>
               <h3 class="disp" style="line-height:1.08;font-size:clamp(24px,2.6vw,34px);margin:0 0 14px;max-width:20ch">{{ p.cardTitle }}</h3>
@@ -84,15 +118,15 @@
                 </sc-for>
               </div>
               <div style="display:flex;flex-wrap:wrap;align-items:center;gap:20px">
-                <span style="font-size:16px;color:#542eeb;border-bottom:1px solid #542eeb;padding-bottom:3px">View case study →</span>
+                <span style="font-size:16px;color:#542eeb;border-bottom:1px solid #542eeb;padding-bottom:3px">{{ t.viewCase }}</span>
                 <sc-if value="{{ p.openDemo }}" hint-placeholder-val="{{ false }}">
-                  <span role="link" tabindex="0" onClick="{{ p.openDemo }}" style="font-size:16px;color:#542eeb;border-bottom:1px solid #542eeb;padding-bottom:3px;cursor:pointer" style-hover="color:#3a1eb0;border-color:#3a1eb0">Live prototype ↗</span>
+                  <span role="link" tabindex="0" onClick="{{ p.openDemo }}" style="font-size:16px;color:#542eeb;border-bottom:1px solid #542eeb;padding-bottom:3px;cursor:pointer" style-hover="color:#3a1eb0;border-color:#3a1eb0">{{ t.livePrototype }}</span>
                 </sc-if>
               </div>
             </div>
-            <div style="aspect-ratio:16/11;border-radius:14px;overflow:hidden;background:#e6e8ff">
+            <div class="pmedia" style="aspect-ratio:16/11;border-radius:14px;overflow:hidden;background:#e6e8ff">
               <sc-if value="{{ p.thumb }}" hint-placeholder-val="{{ false }}">
-                <img src="{{ p.thumb }}" alt="{{ p.cardTitle }}" style="width:100%;height:100%;max-width:100%;object-fit:cover;display:block;transform:scale(1.22);transform-origin:center">
+                <img src="{{ p.thumb }}" alt="{{ p.cardTitle }}" style="{{ p.thumbStyle }}">
               </sc-if>
               <sc-if value="{{ p.noThumb }}" hint-placeholder-val="{{ true }}">
                 <image-slot id="thumb-{{ p.id }}" shape="rounded" radius="14" placeholder="Imagen del proyecto"></image-slot>
@@ -102,16 +136,16 @@
         </sc-for>
       </div>
     </section>
-    <section id="about" style="max-width: 1180px; margin: 0 auto; padding: clamp(32px,4.5vw,60px) clamp(20px,6vw,72px) clamp(52px,8vw,110px)">
-      <div style="display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,56px);align-items:start">
+    <section id="about" style="max-width: 1180px; margin: 0 auto; padding: clamp(36px,6vw,80px) clamp(20px,6vw,72px) clamp(36px,6vw,80px)">
+      <div class="g2" style="display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,56px);align-items:start">
         <div style="max-width:52ch">
           <div data-reveal="y" style="margin-bottom:clamp(14px,1.8vw,22px)">
-            <div style="font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-bottom:10px">Toronto, Canada</div>
-            <h2 class="disp" style="font-size:clamp(30px,3.8vw,50px);margin:0">About me</h2>
+            <div style="font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-bottom:10px">{{ t.homeAboutLoc }}</div>
+            <h2 class="disp" style="font-size:clamp(30px,3.8vw,50px);margin:0">{{ t.homeAboutTitle }}</h2>
           </div>
-          <p data-reveal="y" style="font-size:clamp(17px,1.3vw,19px);line-height:1.65;margin:0 0 18px">Based in Toronto, I'm a Senior Product Designer focused on creating intuitive solutions that streamline workflows, enhance compliance and simplify complex processes.</p>
-          <p data-reveal="y" data-delay="80" style="font-size:clamp(17px,1.3vw,19px);line-height:1.65;margin:0 0 28px">I lean on data and analytics to drive smarter, faster business decisions while making user experiences more efficient and accessible.</p>
-          <a data-reveal="y" data-delay="140" href="#about" onClick="{{ goAbout }}" style="display:inline-block;font-size:16px;border-bottom:1px solid #542eeb;text-decoration:none;padding-bottom:3px">More about me →</a>
+          <p data-reveal="y" style="font-size:clamp(17px,1.3vw,19px);line-height:1.65;margin:0 0 18px">{{ t.homeAboutP1 }}</p>
+          <p data-reveal="y" data-delay="80" style="font-size:clamp(17px,1.3vw,19px);line-height:1.65;margin:0 0 28px">{{ t.homeAboutP2 }}</p>
+          <a data-reveal="y" data-delay="140" href="#about" onClick="{{ goAbout }}" style="display:inline-block;font-size:16px;border-bottom:1px solid #542eeb;text-decoration:none;padding-bottom:3px">{{ t.moreAbout }}</a>
         </div>
         <div data-reveal="y" data-delay="100" style="position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden">
           <img src="assets/fiorella-about.png" alt="Fiorella Donayre" style="width:100%;height:100%;max-width:100%;object-fit:cover;object-position:center top;display:block;transform:scale(1.18) translateY(-4%);transform-origin:center top">
@@ -124,16 +158,16 @@
 
   <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
   <div style="position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:clamp(44px,7vw,92px) clamp(20px,6vw,72px) clamp(50px,7vw,96px)">
-    <h1 data-reveal="y" class="disp" style="font-size:clamp(42px,7vw,92px);margin:0 0 clamp(30px,4vw,52px)">Behind the Screens</h1>
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(26px,5vw,64px);align-items:start">
-      <div data-reveal="y" style="border-radius:16px;overflow:hidden;background:#e6e8ff;position:sticky;top:110px">
+    <h1 data-reveal="y" class="disp" style="font-size:clamp(42px,7vw,92px);margin:0 0 clamp(30px,4vw,52px)">{{ t.aboutTitle }}</h1>
+    <div class="g2" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(26px,5vw,64px);align-items:start">
+      <div data-reveal="y" class="stickyimg" style="border-radius:16px;overflow:hidden;background:#e6e8ff;position:sticky;top:110px">
         <img src="assets/fiorella-about.png" alt="Fiorella Donayre" style="width:100%;max-width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;display:block">
       </div>
       <div>
         
-        <p data-reveal="y" style="font-size: 17px; line-height: 1.65; color: #000; margin: 0 0 18px; font-family: Inter">I’m a Product Designer based in Toronto with over 7 years of experience designing digital products, SaaS platforms, and operational tools. My background in visual design shaped a strong attention to hierarchy, systems, and interface quality, while my work today focuses on solving complex product and workflow problems.</p>
-        <p data-reveal="y" style="font-size: 17px; line-height: 1.65; color: #000; margin: 0 0 18px; font-family: Inter">I’m most interested in products where design has to balance user needs, business goals, technical constraints, and operational realities. I use research, product data, and close collaboration with engineering and stakeholders to define the right problems, prioritize opportunities, and turn complex processes into clear, scalable experiences.</p>
-        <p data-reveal="y" style="font-size: 17px; line-height: 1.65; color: #000; margin: 0 0 36px; font-family: Inter">I enjoy working through ambiguity, connecting insights across teams, and thinking beyond individual screens to understand how a product works as a system. Outside of work, I’m usually experimenting with new ideas, learning new tools, cooking, or sketching whatever catches my attention.</p>
+        <p data-reveal="y" style="font-size: 17px; line-height: 1.65; color: #000; margin: 0 0 18px; font-family: Inter">{{ t.aboutP1 }}</p>
+        <p data-reveal="y" style="font-size: 17px; line-height: 1.65; color: #000; margin: 0 0 18px; font-family: Inter">{{ t.aboutP2 }}</p>
+        <p data-reveal="y" style="font-size: 17px; line-height: 1.65; color: #000; margin: 0 0 36px; font-family: Inter">{{ t.aboutP3 }}</p>
         <div data-reveal="y" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px">
           <sc-for list="{{ capabilities }}" as="c" hint-placeholder-count="4">
             <div style="background:#e6e8ff;border-radius:14px;padding:22px 20px">
@@ -150,7 +184,7 @@
   <sc-if value="{{ isCase }}" hint-placeholder-val="{{ false }}">
   <div style="position:relative;z-index:1">
     <div style="max-width:1180px;margin:0 auto;padding:clamp(26px,4vw,48px) clamp(20px,6vw,72px) 0">
-      <a href="#projects" onClick="{{ goWork }}" style="font-size:15px;text-decoration:none;color:rgba(0,0,0,.55)" style-hover="color:#542eeb">← All projects</a>
+      <a href="#projects" onClick="{{ goWork }}" style="font-size:15px;text-decoration:none;color:rgba(0,0,0,.55)" style-hover="color:#542eeb">{{ t.allProjects }}</a>
     </div>
 
     <header style="max-width:1180px;margin:0 auto;padding:clamp(18px,3vw,32px) clamp(20px,6vw,72px) clamp(26px,4vw,44px)">
@@ -160,14 +194,14 @@
         <p data-reveal="y" data-delay="80" style="font-size:clamp(16px,1.75vw,20px);line-height:1.45;color:#000;margin:18px 0 0">{{ cs.subtitle }}</p>
       </sc-if>
       <sc-if value="{{ cs.demo }}" hint-placeholder-val="{{ false }}">
-        <a data-reveal="y" data-delay="140" href="{{ cs.demo }}" target="_blank" rel="noopener" style="display:inline-block;margin-top:18px;font-size:16px;color:#542eeb;text-decoration:none;border-bottom:1px solid #542eeb;padding-bottom:3px" style-hover="color:#3a1eb0;border-color:#3a1eb0">View live prototype ↗</a>
+        <a data-reveal="y" data-delay="140" href="{{ cs.demo }}" target="_blank" rel="noopener" style="display:inline-block;margin-top:18px;font-size:16px;color:#542eeb;text-decoration:none;border-bottom:1px solid #542eeb;padding-bottom:3px" style-hover="color:#3a1eb0;border-color:#3a1eb0">{{ t.viewLiveProto }}</a>
       </sc-if>
     </header>
 
     <div data-reveal="y" style="max-width:1180px;margin:0 auto clamp(34px,5vw,64px);padding:0 clamp(20px,6vw,72px)">
-      <div style="border-radius:16px;overflow:hidden;background:#e6e8ff">
+      <div style="border-radius:16px;overflow:hidden;background:#e6e8ff;aspect-ratio:16/9">
         <sc-if value="{{ cs.hero }}" hint-placeholder-val="{{ false }}">
-          <img src="{{ cs.hero }}" alt="{{ cs.title }}" style="width:100%;max-width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transform:scale(1.22);transform-origin:center">
+          <img src="{{ cs.hero }}" alt="{{ cs.title }}" style="width:100%;height:100%;max-width:100%;object-fit:cover;display:block;transform:scale(1.14);transform-origin:center">
         </sc-if>
         <sc-if value="{{ cs.noHero }}" hint-placeholder-val="{{ true }}">
           <div style="aspect-ratio:16/9"><image-slot id="hero-{{ cs.id }}" shape="rounded" radius="16" placeholder="Imagen principal del proyecto"></image-slot></div>
@@ -175,9 +209,9 @@
       </div>
     </div>
 
-    <section style="max-width:1180px;margin:0 auto;padding:0 clamp(20px,6vw,72px) clamp(36px,5vw,68px);display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr);gap:clamp(24px,4vw,56px);align-items:start">
+    <section class="g2" style="max-width:1180px;margin:0 auto;padding:0 clamp(20px,6vw,72px) clamp(36px,5vw,68px);display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr);gap:clamp(24px,4vw,56px);align-items:start">
       <div data-reveal="y">
-        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:14px">Project overview</div>
+        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:14px">{{ t.projectOverview }}</div>
         <sc-if value="{{ cs.overviewLead }}" hint-placeholder-val="{{ false }}">
           <h3 class="disp" style="font-size:clamp(20px,2.1vw,28px);line-height:1.18;margin:0 0 16px">{{ cs.overviewLead }}</h3>
         </sc-if>
@@ -186,13 +220,13 @@
         </sc-for>
       </div>
       <div data-reveal="y" style="background:#e6e8ff;border-radius:16px;padding:26px 24px">
-        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:10px">Role</div>
+        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:10px">{{ t.role }}</div>
         <p style="font-size:clamp(17px,1.3vw,19px);line-height:1.65;color:#000;margin:0 0 22px">{{ cs.role }}</p>
         <sc-if value="{{ cs.tools }}" hint-placeholder-val="{{ false }}">
-          <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:10px;border-top:1px solid rgba(0,0,0,.1);padding-top:20px">Tools</div>
+          <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:10px;border-top:1px solid rgba(0,0,0,.1);padding-top:20px">{{ t.tools }}</div>
           <p style="font-size:clamp(17px,1.3vw,19px);line-height:1.65;color:#000;margin:0 0 22px">{{ cs.tools }}</p>
         </sc-if>
-        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:6px;border-top:1px solid rgba(0,0,0,.1);padding-top:20px">Timeline</div>
+        <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:6px;border-top:1px solid rgba(0,0,0,.1);padding-top:20px">{{ t.timeline }}</div>
         <p class="disp" style="margin:0;font-size:28px">{{ cs.timeline }}</p>
       </div>
     </section>
@@ -206,7 +240,7 @@
         </div>
         <sc-if value="{{ cs.showSolution }}" hint-placeholder-val="{{ true }}">
         <div data-reveal="y" data-delay="120">
-          <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:14px">Solution</div>
+          <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:14px">{{ t.solution }}</div>
           <p style="font-size:clamp(17px,1.3vw,19px);line-height:1.65;color:#000;margin:0 0 14px">{{ cs.solutionLead }}</p>
           <p style="font-size:clamp(17px,1.3vw,19px);line-height:1.65;color:#000;margin:0">{{ cs.solution }}</p>
         </div>
@@ -218,7 +252,7 @@
     <sc-if value="{{ cs.hasSections }}" hint-placeholder-val="{{ false }}">
     <section style="max-width:1180px;margin:0 auto;padding:clamp(40px,6vw,80px) clamp(20px,6vw,72px) 0;display:flex;flex-direction:column;gap:clamp(34px,5vw,64px)">
       <sc-for list="{{ cs.sections }}" as="sec" hint-placeholder-count="4">
-        <div data-reveal="y" style="display:grid;grid-template-columns:minmax(0,.42fr) minmax(0,1fr);gap:clamp(20px,3vw,48px);align-items:start;border-top:1px solid rgba(0,0,0,.12);padding-top:clamp(18px,2.4vw,28px)">
+        <div data-reveal="y" class="glab" style="display:grid;grid-template-columns:minmax(0,.42fr) minmax(0,1fr);gap:clamp(20px,3vw,48px);align-items:start;border-top:1px solid rgba(0,0,0,.12);padding-top:clamp(18px,2.4vw,28px)">
           <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb">{{ sec.label }}</div>
           <div>
             <sc-if value="{{ sec.lead }}" hint-placeholder-val="{{ false }}">
@@ -328,12 +362,12 @@
     </sc-if>
 
     <section style="max-width:1180px;margin:0 auto;padding:clamp(40px,6vw,80px) clamp(20px,6vw,72px) clamp(50px,7vw,96px)">
-      <div data-reveal="y" style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:14px">Outcome</div>
+      <div data-reveal="y" style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:14px">{{ t.outcome }}</div>
       <h2 data-reveal="y" class="disp" style="line-height:1.14;font-size:clamp(23px,2.3vw,32px);margin:0 0 28px">{{ cs.outcomeLead }}</h2>
-      <div style="margin-bottom:clamp(28px,4vw,44px);border-top:1px solid rgba(0,0,0,.12);border-bottom:1px solid rgba(0,0,0,.12);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,4vw,52px);align-items:start">
+      <div style="margin-bottom:clamp(28px,4vw,44px);border-top:1px solid rgba(0,0,0,.12);border-bottom:1px solid rgba(0,0,0,.12);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,4vw,52px);align-items:start" class="g2">
         <div data-reveal="y" style="padding:clamp(22px,3vw,34px) 0">
           <div class="disp" style="font-weight:900;font-size:clamp(48px,7.5vw,96px);color:#542eeb;white-space:pre-line">{{ cs.statLead.v }}</div>
-          <div style="font-size:clamp(15px,1.2vw,17px);letter-spacing:.04em;text-transform:uppercase;color:rgba(0,0,0,.55);margin-top:8px;white-space:nowrap">{{ cs.statLead.l }}</div>
+          <div style="font-size:clamp(15px,1.2vw,17px);letter-spacing:.04em;text-transform:uppercase;color:rgba(0,0,0,.55);margin-top:8px">{{ cs.statLead.l }}</div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));column-gap:clamp(18px,3vw,36px);row-gap:clamp(14px,2vw,24px);padding:clamp(22px,3vw,34px) 0">
           <sc-for list="{{ cs.statRest }}" as="s" hint-placeholder-count="2">
@@ -352,15 +386,15 @@
       <sc-if value="{{ cs.demo }}" hint-placeholder-val="{{ false }}">
         <div data-reveal="y" style="margin-top:clamp(30px,4vw,52px);background:#e6e8ff;border-radius:16px;padding:clamp(26px,3.4vw,40px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px">
           <div>
-            <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:8px">Live demo</div>
-            <div class="disp" style="font-size:clamp(22px,2.4vw,32px);line-height:1.16">Explore the live prototype</div>
+            <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:8px">{{ t.liveDemo }}</div>
+            <div class="disp" style="font-size:clamp(22px,2.4vw,32px);line-height:1.16">{{ t.exploreProto }}</div>
           </div>
-          <a href="{{ cs.demo }}" target="_blank" rel="noopener" style="text-decoration:none;background:#542eeb;color:#fffdfe;padding:14px 26px;border-radius:999px;font-size:16px;white-space:nowrap" style-hover="background:#3a1eb0">View prototype ↗</a>
+          <a href="{{ cs.demo }}" target="_blank" rel="noopener" style="text-decoration:none;background:#542eeb;color:#fffdfe;padding:14px 26px;border-radius:999px;font-size:16px;white-space:nowrap" style-hover="background:#3a1eb0">{{ t.viewProto }}</a>
         </div>
       </sc-if>
 
       <sc-if value="{{ cs.reflection }}" hint-placeholder-val="{{ false }}">
-        <div data-reveal="y" style="display:grid;grid-template-columns:minmax(0,.42fr) minmax(0,1fr);gap:clamp(20px,3vw,48px);align-items:start;border-top:1px solid rgba(0,0,0,.12);padding-top:clamp(18px,2.4vw,28px);margin-top:clamp(30px,4vw,52px)">
+        <div data-reveal="y" class="glab" style="display:grid;grid-template-columns:minmax(0,.42fr) minmax(0,1fr);gap:clamp(20px,3vw,48px);align-items:start;border-top:1px solid rgba(0,0,0,.12);padding-top:clamp(18px,2.4vw,28px);margin-top:clamp(30px,4vw,52px)">
           <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb">{{ cs.reflection.label }}</div>
           <div>
             <h3 class="disp" style="font-size:clamp(22px,2.4vw,32px);line-height:1.18;margin:0 0 16px;max-width:32ch">{{ cs.reflection.lead }}</h3>
@@ -373,7 +407,7 @@
 
 
       <div data-reveal="y" style="margin-top:clamp(32px,4vw,56px);border-top:1px solid rgba(0,0,0,.1);padding-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
-        <span style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,0,0,.45)">Next project</span>
+        <span style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,0,0,.45)">{{ t.nextProject }}</span>
         <a href="#case" onClick="{{ nextCase }}" class="disp" style="font-size:clamp(22px,2.6vw,34px);text-decoration:none;color:#000" style-hover="color:#542eeb">{{ nextTitle }} →</a>
       </div>
     </section>
@@ -384,18 +418,18 @@
     <div style="max-width:1180px;margin:0 auto;padding:clamp(40px,5vw,64px) clamp(20px,6vw,72px) clamp(22px,3vw,32px)">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(20px,3vw,44px);align-items:center">
         <div>
-          <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:10px">Let's get in touch</div>
+          <div style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#542eeb;margin-bottom:10px">{{ t.footerCta }}</div>
           <a href="mailto:fioredonqui910@gmail.com" class="disp" style="font-size:clamp(20px,1.8vw,26px);color:#000;text-decoration:none" style-hover="color:#542eeb">fioredonqui910@gmail.com</a>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end">
-          <a href="mailto:fioredonqui910@gmail.com" style="font-size:15px;text-decoration:none;background:#542eeb;color:#fffdfe;padding:11px 22px;border-radius:999px" style-hover="background:#3a1eb0">Email me</a>
+          <a href="mailto:fioredonqui910@gmail.com" style="font-size:15px;text-decoration:none;background:#542eeb;color:#fffdfe;padding:11px 22px;border-radius:999px" style-hover="background:#3a1eb0">{{ t.emailMe }}</a>
           <a href="https://www.behance.net/fioree910" target="_blank" rel="noopener" style="font-size:15px;color:#000;text-decoration:none;border:1px solid rgba(0,0,0,.16);padding:11px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center" aria-label="Behance" title="Behance" style-hover="background:#e6e8ff;border-color:#e6e8ff"><svg width="19" height="18" viewBox="1 2 25 20" fill="currentColor" aria-hidden="true"><path d="M9.6 3.2H2v17.6h7.9c3.6 0 5.8-1.7 5.8-4.9 0-2.1-1-3.6-2.9-4.2 1.4-.6 2.2-1.9 2.2-3.6 0-3-2.1-4.9-5.4-4.9zm-.4 7.1H5.3V6h3.8c1.4 0 2.2.7 2.2 2.1 0 1.4-.8 2.2-2.1 2.2zm.4 7.5H5.3v-4.7h4.2c1.6 0 2.5.9 2.5 2.4s-.9 2.3-2.4 2.3zM17.6 5.4h5.9v1.5h-5.9V5.4zm3 3.6c-3 0-5 2.2-5 5.5 0 3.4 1.9 5.5 5.1 5.5 2.5 0 4.3-1.3 4.8-3.4h-2.7c-.3.8-1 1.2-2 1.2-1.4 0-2.2-.9-2.3-2.5H25v-.7c0-3.4-1.8-5.6-4.4-5.6zm-2.1 4.4c.2-1.4 1-2.2 2.1-2.2 1.2 0 1.9.8 2 2.2h-4.1z"></path></svg></a>
           <a href="https://www.linkedin.com/in/fiorella-donayre-quinones/" target="_blank" rel="noopener" style="font-size:15px;color:#000;text-decoration:none;border:1px solid rgba(0,0,0,.16);padding:11px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center" aria-label="LinkedIn" title="LinkedIn" style-hover="background:#e6e8ff;border-color:#e6e8ff"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM2.4 21h5.1V9.4H2.4V21zM9.9 9.4V21h5.1v-6.2c0-1.7.6-2.8 2-2.8 1.4 0 1.9 1 1.9 2.8V21h5.1v-6.9c0-3.5-1.9-5-4.4-5-2 0-3.1 1-3.7 1.9h-.1V9.4H9.9z"></path></svg></a>
         </div>
       </div>
       <div style="margin-top:clamp(28px,4vw,44px);border-top:1px solid rgba(0,0,0,.08);padding-top:16px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:14px;color:rgba(0,0,0,.5)">
-        <span>©2025 All Rights Reserved — Fiorella Donayre</span>
-        <span>Toronto, Canada</span>
+        <span>{{ t.rights }}</span>
+        <span>{{ t.homeAboutLoc }}</span>
       </div>
     </div>
   </footer>
@@ -414,7 +448,7 @@ const PROJECTS = [
     tags: ['Product Design', 'UX Research', 'SaaS', 'Logistics'],
     cardStats: [{ v: '136% \u2191', l: 'adoption' }, { v: '40% \u2193', l: 'task time' }],
     thumb: 'assets/ecom-platform.png',
-    hero: 'assets/ecom-platform.png',
+    hero: 'assets/ecom-cover-v2.png',
     gallery: [
       'https://fiorelladonayre.com/resources/img/project_ecom_5.png',
       'https://fiorelladonayre.com/resources/img/project_ecom_3.png',
@@ -762,8 +796,447 @@ const PROJECTS = [
   }
 ];
 
+const ES_PROJECTS = {
+  ecom: {
+    timeline: '8 meses',
+    cardTitle: 'Plataforma de Gesti\u00f3n de Env\u00edos',
+    title: 'Plataforma de Gesti\u00f3n de Env\u00edos',
+    eyebrow: 'Ecom Logistics \u00b7 SaaS interno',
+    subtitle: 'Consolidando env\u00edos, precios, seguimiento y facturaci\u00f3n en una sola plataforma operativa.',
+    blurb: 'Consolidando env\u00edos, precios, seguimiento y facturaci\u00f3n en una sola plataforma operativa.',
+    tags: ['Dise\u00f1o de Producto', 'Investigaci\u00f3n UX', 'SaaS', 'Log\u00edstica'],
+    cardStats: [{ v: '136% \u2191', l: 'adopci\u00f3n' }, { v: '40% \u2193', l: 'tiempo por tarea' }],
+    role: 'Dise\u00f1o de Producto \u00b7 Investigaci\u00f3n UX \u00b7 Arquitectura de Producto \u00b7 Prototipado \u00b7 Pruebas de Usabilidad',
+    overview: [
+      'Ecom Logistics depend\u00eda de herramientas internas y de terceros para gestionar env\u00edos, \u00f3rdenes, precios, seguimiento y facturaci\u00f3n. A medida que el negocio creci\u00f3, los flujos diarios se volvieron cada vez m\u00e1s fragmentados, obligando a los equipos a moverse entre sistemas y recurrir a soluciones manuales.',
+      'Trabaj\u00e9 en el dise\u00f1o de una plataforma interna de env\u00edos capaz de consolidar esos flujos en un solo producto escalable, reduciendo la fricci\u00f3n operativa y apoyando los objetivos de negocio de la empresa.'
+    ],
+    sections: [
+      {
+        label: 'El reto',
+        lead: 'Un flujo de trabajo potente se hab\u00eda vuelto innecesariamente dif\u00edcil de usar.',
+        paras: [
+          'Los equipos de operaciones, ventas y finanzas depend\u00edan de la plataforma durante todo el ciclo de vida del env\u00edo, pero completar tareas comunes requer\u00eda demasiados pasos y constantes cambios de contexto.',
+          'El reto iba m\u00e1s all\u00e1 de mejorar pantallas individuales. Necesit\u00e1bamos entender c\u00f3mo se mov\u00edan la informaci\u00f3n, las decisiones y las entregas a lo largo de todo el proceso de env\u00edo, y determinar d\u00f3nde el propio producto estaba generando fricci\u00f3n.'
+        ],
+        steps: ['Crear orden', 'Precios', 'Env\u00edo', 'Seguimiento', 'Facturaci\u00f3n'],
+        notes: ['Herramientas desconectadas', 'Entregas manuales', 'Visibilidad limitada', 'Datos repetidos']
+      },
+      {
+        label: 'Investigaci\u00f3n y descubrimiento',
+        lead: 'Entender d\u00f3nde se romp\u00eda el flujo de trabajo',
+        paras: [
+          'Habl\u00e9 con usuarios de operaciones, ventas y finanzas, y mape\u00e9 el proceso de env\u00edo de extremo a extremo, desde la creaci\u00f3n de una orden hasta el seguimiento y la facturaci\u00f3n.',
+          'En lugar de centrarme solo en la fricci\u00f3n de la interfaz, observ\u00e9 d\u00f3nde los usuarios perd\u00edan tiempo, cambiaban de herramienta, depend\u00edan de otros equipos o luchaban por encontrar la informaci\u00f3n necesaria para continuar.',
+          'Esto permiti\u00f3 separar los problemas de usabilidad superficiales de los problemas de flujo m\u00e1s amplios que deb\u00edan resolverse a nivel de producto.'
+        ],
+        artifacts: [
+          { t: 'Conversaciones con usuarios', d: 'Operaciones \u00b7 Ventas \u00b7 Finanzas' },
+          { t: 'Mapeo de flujos', d: 'Ciclo de vida del env\u00edo y entregas entre equipos' },
+          { t: 'An\u00e1lisis de tareas', d: 'Acciones de alta frecuencia y alta fricci\u00f3n' }
+        ]
+      },
+      {
+        label: 'Hallazgos clave',
+        insights: [
+          { n: '01', t: 'La visibilidad sol\u00eda importar m\u00e1s que a\u00f1adir funcionalidad.', d: 'Los usuarios necesitaban entender r\u00e1pidamente el estado del env\u00edo, los precios y las excepciones antes de decidir el siguiente paso.' },
+          { n: '02', t: 'Demasiadas acciones depend\u00edan de entregas entre equipos.', d: 'Flujos simples se volv\u00edan lentos cuando la informaci\u00f3n ten\u00eda que confirmarse o transferirse manualmente entre operaciones, ventas y finanzas.' },
+          { n: '03', t: 'Las excepciones eran parte del d\u00eda a d\u00eda.', d: 'Las reglas de precios, los cambios de env\u00edo y los casos l\u00edmite no pod\u00edan tratarse como escenarios secundarios. El producto necesitaba flexibilidad sin complicar las tareas comunes.' }
+        ],
+        statement: 'La oportunidad no era solo redise\u00f1ar la interfaz, sino simplificar el modelo operativo detr\u00e1s de ella.'
+      },
+      {
+        label: 'De los hallazgos a las decisiones de producto',
+        lead: 'Dise\u00f1ar alrededor del trabajo real de los usuarios',
+        paras: [
+          'Reorganic\u00e9 el producto en torno a las tareas operativas m\u00e1s frecuentes en lugar de la estructura del sistema existente.',
+          'El objetivo era reducir la carga cognitiva, mostrar antes la informaci\u00f3n relevante y permitir completar los flujos comunes sin navegaci\u00f3n ni coordinaci\u00f3n innecesarias.'
+        ],
+        decisions: [
+          { n: '01', t: 'Creaci\u00f3n de env\u00edos simplificada', d: 'Redise\u00f1\u00e9 la creaci\u00f3n de env\u00edos como un flujo paso a paso m\u00e1s claro, agrupando decisiones relacionadas y reduciendo la cantidad de informaci\u00f3n a procesar a la vez.', img: 'assets/ecom-single-shipment.png' },
+          { n: '02', t: 'Visibilidad centralizada del env\u00edo', d: 'El historial, el seguimiento, el estado y los detalles operativos se integraron en una experiencia m\u00e1s unificada, para que los equipos entendieran qu\u00e9 ocurr\u00eda sin moverse entre herramientas.', img: 'assets/ecom-shipping-history.png' },
+          { n: '03', t: 'Dise\u00f1ado para la flexibilidad operativa', d: 'Los precios y las reglas de negocio deb\u00edan admitir excepciones sin dificultar el flujo principal. Dise\u00f1\u00e9 patrones que permiten a la plataforma acomodar distintos escenarios de env\u00edo manteniendo predecibles las acciones comunes.', img: 'assets/ecom-shipment-zones.png' }
+        ]
+      },
+      {
+        label: 'Validaci\u00f3n e iteraci\u00f3n',
+        lead: 'Probar los flujos antes de desarrollar',
+        paras: [
+          'Us\u00e9 prototipos interactivos para validar los flujos de mayor impacto: creaci\u00f3n de env\u00edos, navegaci\u00f3n, seguimiento y acceso a la informaci\u00f3n del env\u00edo.',
+          'El feedback de usuarios y stakeholders ayud\u00f3 a identificar terminolog\u00eda poco clara, interacciones innecesarias y puntos donde la informaci\u00f3n deb\u00eda aparecer antes en el proceso.',
+          'Iter\u00e9 sobre esos flujos antes del handoff, simplificando interacciones y afinando la jerarqu\u00eda de informaci\u00f3n para que el producto soportara tanto las tareas frecuentes como los escenarios operativos m\u00e1s complejos.'
+        ],
+        steps: ['Prototipar', 'Probar', 'Aprender', 'Iterar'],
+        notes: ['Navegaci\u00f3n y terminolog\u00eda m\u00e1s claras', 'Menos pasos innecesarios', 'Informaci\u00f3n cr\u00edtica visible antes']
+      }
+    ],
+    outcomeLead: 'De un problema de flujo interno a una plataforma que sostiene $1M en ventas el primer a\u00f1o.',
+    stats: [
+      { v: '$100K \n \u2192 $1M', l: 'ventas anuales en el primer a\u00f1o completo' },
+      { v: '136%', l: 'aumento en la adopci\u00f3n' },
+      { v: '40%', l: 'reducci\u00f3n del tiempo por tarea' },
+      { v: '50%', l: 'aumento en la visibilidad general' },
+      { v: '$10K', l: 'costo anual de software de terceros eliminado' },
+      { v: '1.5 a\u00f1os', l: 'para el retorno total de la inversi\u00f3n' }
+    ],
+    outcome: [
+      'Al simplificar los flujos principales y consolidar la informaci\u00f3n cr\u00edtica de los env\u00edos, la plataforma hizo las operaciones diarias m\u00e1s r\u00e1pidas y f\u00e1ciles de gestionar. La adopci\u00f3n aument\u00f3 un 136%, el tiempo de finalizaci\u00f3n de tareas baj\u00f3 un 40% y los equipos reportaron mayor visibilidad de la operaci\u00f3n.',
+      'Reemplazar la soluci\u00f3n de terceros anterior tambi\u00e9n elimin\u00f3 cerca de $10K en costos anuales de software. La plataforma alcanz\u00f3 el ROI total en 1.5 a\u00f1os y sostuvo un crecimiento de ventas de aproximadamente $100K a $1M en su primer a\u00f1o completo.'
+    ]
+  },
+  clear: {
+    timeline: 'Proyecto propio',
+    cardTitle: 'Experiencia Bancaria de Documentos con IA',
+    title: 'Experiencia Bancaria de Documentos con IA',
+    eyebrow: 'Clear \u00b7 Concepto independiente',
+    subtitle: 'Ayudar a los clientes a entender documentos bancarios complejos mediante explicaciones claras, verificaci\u00f3n de la fuente y preguntas de seguimiento en contexto.',
+    blurb: 'Ayudar a los clientes a entender documentos bancarios complejos con explicaciones claras y verificaci\u00f3n de la fuente.',
+    tags: ['Dise\u00f1o de Producto', 'Interacci\u00f3n con IA', 'Fintech', 'Prototipado'],
+    cardStats: [{ v: 'Explicar', l: 'lenguaje claro' }, { v: 'Verificar', l: 'ligado a la fuente' }],
+    role: 'Dise\u00f1o de Producto \u00b7 Investigaci\u00f3n UX \u00b7 Dise\u00f1o de Interacci\u00f3n con IA \u00b7 Prototipado',
+    tools: 'Figma \u00b7 Lovable \u00b7 Cursor \u00b7 GitHub \u00b7 Vercel',
+    overviewLead: 'Hacer m\u00e1s comprensibles los documentos bancarios complejos',
+    overview: [
+      'Los clientes reciben con regularidad documentos bancarios importantes con cambios en comisiones, tasas, t\u00e9rminos, recompensas o condiciones de la cuenta.',
+      'La informaci\u00f3n t\u00e9cnicamente est\u00e1 disponible, pero suele estar enterrada en PDFs extensos y escrita en un lenguaje dif\u00edcil de interpretar r\u00e1pido.',
+      'Clear es un concepto de producto independiente que explora c\u00f3mo la IA podr\u00eda ayudar a los clientes a entender esos documentos dentro de la experiencia digital que su banco ya ofrece.',
+      'El objetivo no era reemplazar el documento original ni dar asesor\u00eda financiera, sino ayudar a entender qu\u00e9 cambi\u00f3, cu\u00e1ndo entra en vigor, c\u00f3mo puede afectarles y de d\u00f3nde viene esa informaci\u00f3n.'
+    ],
+    sections: [
+      {
+        label: 'El problema',
+        lead: 'La informaci\u00f3n importante estaba disponible, pero no siempre era comprensible',
+        paras: [
+          'Un cliente puede abrir un aviso bancario importante, hojear varias p\u00e1ginas y aun as\u00ed quedarse sin entender el cambio.',
+          'El problema no era el acceso a la informaci\u00f3n, sino la comprensi\u00f3n.',
+          'Detalles clave como fechas de entrada en vigor, condiciones, cambios de comisiones o acciones requeridas pod\u00edan pasar desapercibidos dentro de documentos densos.'
+        ],
+        statement: '\u00bfC\u00f3mo podr\u00eda un banco ayudar a sus clientes a entender sus propios documentos justo cuando necesitan claridad?'
+      },
+      {
+        label: 'Estrategia de producto',
+        lead: 'La confianza pas\u00f3 a ser parte del problema de producto',
+        paras: [
+          'Mi concepto inicial permit\u00eda al cliente subir un documento bancario a una herramienta de IA.',
+          'Pero eso planteaba un problema mayor: \u00bfpor qu\u00e9 deber\u00eda un cliente subir informaci\u00f3n financiera sensible a un servicio externo solo para entender un documento que su banco ya tiene?',
+          'Eso cambi\u00f3 la direcci\u00f3n del producto. En lugar de crear una herramienta de IA independiente, reposicion\u00e9 Clear como una funcionalidad dentro de la secci\u00f3n de Documentos que el banco ya ofrece.',
+          'El documento ya existe dentro de la relaci\u00f3n bancaria del cliente, lo que reduce fricci\u00f3n innecesaria y crea un contexto m\u00e1s confiable para la asistencia de IA.'
+        ],
+        slot: true, slotId: 'clear-strategy', slotHint: 'Documentos \u2192 Elegir documento \u2192 Preguntar a Clear'
+      },
+      {
+        label: 'Dise\u00f1ar la interacci\u00f3n con IA',
+        lead: 'Explicar. Verificar. Preguntar.',
+        paras: ['Simplifiqu\u00e9 la experiencia de IA en torno a tres acciones centrales.'],
+        artifacts: [
+          { t: 'Explicar', d: 'Mostrar los cambios m\u00e1s importantes en lenguaje claro y facilitar la lectura de fechas, montos y condiciones.' },
+          { t: 'Verificar', d: 'Conectar cada explicaci\u00f3n con el documento original para que el cliente confirme de d\u00f3nde sali\u00f3 la informaci\u00f3n.' },
+          { t: 'Preguntar', d: 'Permitir preguntas de seguimiento en contexto sin salir de la experiencia del documento.' }
+        ],
+        tail: ['En lugar de presentar la IA como un chatbot abierto, estas acciones dieron a la interacci\u00f3n un prop\u00f3sito m\u00e1s claro y mantuvieron el documento bancario original en el centro de la experiencia.']
+      },
+      {
+        label: 'El recorrido del cliente',
+        lead: 'Un recorrido enfocado de seis estados',
+        steps: ['Documentos', 'Detalle del documento', 'Procesando', 'Explicaci\u00f3n', 'Verificaci\u00f3n de la fuente', 'Preguntar a Clear'],
+        paras: [
+          'La experiencia empieza desde un documento al que el cliente ya tiene acceso.',
+          'Clear identifica la informaci\u00f3n relevante, resume los cambios clave y permite revisar la fuente original antes de hacer m\u00e1s preguntas.',
+          'Esto cre\u00f3 una interacci\u00f3n progresiva: el cliente obtiene primero una explicaci\u00f3n r\u00e1pida y profundiza solo cuando lo necesita.'
+        ],
+        img: 'assets/clear-credit-card-notice.png'
+      },
+      {
+        label: 'Probar el concepto',
+        lead: 'Entender qu\u00e9 generaba confianza',
+        paras: [
+          'Prob\u00e9 un prototipo temprano con una participante para entender c\u00f3mo interpretaba la explicaci\u00f3n generada por IA y qu\u00e9 partes de la interacci\u00f3n generaban incertidumbre.',
+          'El resumen result\u00f3 \u00fatil para entender el documento r\u00e1pidamente, pero la prueba tambi\u00e9n expuso problemas importantes.',
+          'Una condici\u00f3n dentro del aviso pas\u00f3 desapercibida al inicio, la participante quer\u00eda verificar d\u00f3nde hab\u00eda encontrado la IA cierta informaci\u00f3n, y subir documentos financieros a una herramienta externa generaba preocupaciones de privacidad.'
+        ],
+        artifacts: [
+          { t: 'Mantener visible la fuente original', d: 'Las explicaciones de IA deben poder rastrearse hasta el documento.' },
+          { t: 'No separar la IA de la experiencia bancaria', d: 'El contexto del banco aport\u00f3 mayor confianza percibida.' },
+          { t: 'Tratar la IA como asistencia, no como autoridad', d: 'La experiencia necesitaba l\u00edmites claros entre explicar y asesorar financieramente.' }
+        ]
+      },
+      {
+        label: 'Del dise\u00f1o al prototipo funcional',
+        paras: [
+          'Quer\u00eda explorar la experiencia m\u00e1s all\u00e1 de un prototipo est\u00e1tico en Figma, as\u00ed que constru\u00ed una versi\u00f3n funcional de Clear con herramientas de desarrollo asistido por IA.',
+          'La interfaz y la l\u00f3gica de producto se dise\u00f1aron primero en Figma y luego se tradujeron a un prototipo funcional, refinado con Lovable, Cursor, GitHub y Vercel.',
+          'Esto me permiti\u00f3 probar c\u00f3mo se comportaba la interacci\u00f3n como producto real, y no solo demostrar el flujo previsto con pantallas clicables.',
+          'La IA aceler\u00f3 partes de la implementaci\u00f3n, mientras que las decisiones de producto, la l\u00f3gica de interacci\u00f3n, la jerarqu\u00eda y el dise\u00f1o de la experiencia se definieron de forma intencional durante todo el proyecto.'
+        ]
+      }
+    ],
+    outcomeLead: 'Un concepto funcional de IA confiable dentro de la banca',
+    stats: [
+      { v: 'Explicar', l: 'interpretaci\u00f3n del documento en lenguaje claro' },
+      { v: 'Verificar', l: 'verificaci\u00f3n de la fuente ligada a la p\u00e1gina' },
+      { v: 'Preguntar', l: 'preguntas de seguimiento en contexto' }
+    ],
+    outcome: [
+      'Clear result\u00f3 en un concepto de producto funcional que demuestra c\u00f3mo la IA puede apoyar la comprensi\u00f3n de documentos sin reemplazar la fuente original del banco.',
+      'El proyecto tambi\u00e9n reforz\u00f3 que dise\u00f1ar productos con IA no se trata solo de generar respuestas \u00fatiles. En contextos sensibles como la banca, la confianza, la procedencia, la privacidad y el control del usuario son parte central del dise\u00f1o de la interacci\u00f3n.'
+    ],
+    reflection: {
+      label: 'Nota sobre el prototipo',
+      lead: 'Un concepto independiente, construido con datos ficticios',
+      paras: ['Clear es un concepto de producto independiente creado para un banco ficticio. El prototipo usa datos ficticios y est\u00e1ticos, y no est\u00e1 afiliado a ninguna instituci\u00f3n financiera real.']
+    }
+  },
+  corein: {
+    timeline: '6 meses',
+    cardTitle: 'Plataforma de Gesti\u00f3n de Inventario TI',
+    title: 'Plataforma de Gesti\u00f3n de Inventario TI',
+    eyebrow: 'Corein \u00b7 Herramienta interna',
+    subtitle: 'Centralizar la gesti\u00f3n de m\u00e1s de 5,000 equipos, licencias y activos relacionados en toda la organizaci\u00f3n.',
+    blurb: 'Centralizar la gesti\u00f3n de m\u00e1s de 5,000 equipos entre equipos de trabajo, sedes y flujos.',
+    tags: ['Dise\u00f1o de Producto', 'Investigaci\u00f3n UX', 'Herramientas internas'],
+    cardStats: [{ v: '5,000+', l: 'equipos' }, { v: '30%', l: 'flujos m\u00e1s r\u00e1pidos' }],
+    role: 'Dise\u00f1o de Producto \u00b7 Investigaci\u00f3n UX \u00b7 An\u00e1lisis de Flujos \u00b7 Prototipado \u00b7 Dise\u00f1o UI',
+    overview: [
+      'Corein es una plataforma interna de gesti\u00f3n de inventario dise\u00f1ada para ayudar a los equipos a rastrear y administrar m\u00e1s de 5,000 laptops, dispositivos, licencias y activos relacionados en toda la organizaci\u00f3n.',
+      'Antes del redise\u00f1o, la informaci\u00f3n cr\u00edtica estaba distribuida en distintos registros y procesos, lo que dificultaba saber qu\u00e9 datos estaban actualizados, d\u00f3nde estaba un equipo o qui\u00e9n era responsable de \u00e9l.',
+      'Trabaj\u00e9 en redise\u00f1ar la experiencia alrededor de un modelo de inventario centralizado, mejorando la visibilidad, reduciendo la fricci\u00f3n operativa y facilitando la gesti\u00f3n diaria de activos para distintos equipos.'
+    ],
+    sections: [
+      {
+        label: 'Problema',
+        lead: 'Gestionar miles de equipos sin una fuente confiable de verdad',
+        paras: [
+          'A medida que el inventario crec\u00eda, los equipos depend\u00edan cada vez m\u00e1s de registros fragmentados y procesos manuales para gestionar dispositivos, responsables, estado, movimientos y devoluciones.',
+          'Preguntas operativas simples requer\u00edan revisar m\u00faltiples fuentes o pedir confirmaci\u00f3n a otros equipos.',
+          'Esto generaba demoras, informaci\u00f3n inconsistente y visibilidad limitada en la organizaci\u00f3n, sobre todo cuando los equipos cambiaban de usuario, sede o etapa del ciclo de vida.'
+        ]
+      },
+      {
+        label: 'Investigaci\u00f3n y descubrimiento',
+        lead: 'Entender el problema de datos',
+        paras: [
+          'Empec\u00e9 observando c\u00f3mo los distintos equipos rastreaban dispositivos, responsables, estado, movimientos e informaci\u00f3n relacionada en toda la organizaci\u00f3n.',
+          'Mediante an\u00e1lisis de flujos, conversaciones con usuarios y datos existentes del producto, encontr\u00e9 que la informaci\u00f3n estaba repartida en m\u00faltiples registros y procesos. Eso dificultaba determinar qu\u00e9 informaci\u00f3n era actual o confiable.',
+          'Tambi\u00e9n revis\u00e9 las tareas m\u00e1s comunes de los usuarios, d\u00f3nde perd\u00edan tiempo y qu\u00e9 informaci\u00f3n necesitaban antes de poder actuar.',
+          'Esto ayud\u00f3 a identificar que el problema no era simplemente una interfaz complicada: el modelo de informaci\u00f3n subyacente necesitaba volverse m\u00e1s claro y estructurado.'
+        ],
+        img: 'assets/corein-registro-equipos.png'
+      },
+      {
+        label: 'Hallazgos clave',
+        lead: 'El problema no era la cantidad de datos, sino lo dif\u00edcil que era actuar sobre ellos',
+        paras: ['Los usuarios necesitaban responder r\u00e1pido preguntas operativas simples:'],
+        notes: [
+          '\u00bfD\u00f3nde est\u00e1 este equipo?',
+          '\u00bfQui\u00e9n es responsable de \u00e9l?',
+          '\u00bfCu\u00e1l es su estado actual?',
+          '\u00bfQu\u00e9 pas\u00f3 con \u00e9l antes?',
+          '\u00bfQu\u00e9 acci\u00f3n sigue?'
+        ],
+        tail: [
+          'Cuando esas respuestas eran dif\u00edciles de encontrar, incluso las tareas simples depend\u00edan de revisiones manuales o de conversaciones entre equipos.',
+          'Eso me llev\u00f3 a enfocar el redise\u00f1o en visibilidad, consistencia y claridad de estado, en lugar de simplemente a\u00f1adir m\u00e1s funcionalidad.'
+        ]
+      },
+      {
+        label: 'Decisiones de dise\u00f1o',
+        lead: 'Construir una sola fuente de verdad',
+        paras: [
+          'Redise\u00f1\u00e9 la plataforma alrededor de un modelo de inventario centralizado que facilit\u00f3 revisar y gestionar informaci\u00f3n clave como estado del equipo, responsable, ubicaci\u00f3n e historial.',
+          'Los filtros y las vistas se estructuraron en torno a tareas operativas reales en lugar de reflejar la estructura de la base de datos.',
+          'Por ejemplo, los usuarios pod\u00edan identificar r\u00e1pidamente equipos disponibles, activos asignados a empleados, equipos pendientes de devoluci\u00f3n, dispositivos que requer\u00edan atenci\u00f3n o inventario inactivo durante per\u00edodos prolongados.',
+          'Tambi\u00e9n introduje patrones de interacci\u00f3n m\u00e1s consistentes para estado, acciones, tablas y detalle del equipo. Esto redujo la ambig\u00fcedad en el producto y cre\u00f3 una base m\u00e1s s\u00f3lida para flujos futuros.'
+        ],
+        img: 'assets/corein-laptop-macbook.png'
+      },
+      {
+        label: 'Pensamiento sist\u00e9mico',
+        lead: 'Dise\u00f1ar para flujos operativos',
+        paras: [
+          'La plataforma necesitaba soportar mucho m\u00e1s que un simple rastreo de inventario.',
+          'Los equipos pasaban por distintas etapas: asignaci\u00f3n, recolecci\u00f3n, reparaci\u00f3n, devoluci\u00f3n, facturaci\u00f3n y baja. Cada etapa implicaba requisitos de informaci\u00f3n y acciones diferentes.',
+          'En lugar de tratarlas como funcionalidades aisladas, analic\u00e9 c\u00f3mo se conectaban a lo largo del ciclo de vida del dispositivo.',
+          'Esto ayud\u00f3 a crear flujos m\u00e1s consistentes y redujo la necesidad de interpretar patrones distintos cada vez que los usuarios cambiaban de secci\u00f3n.'
+        ],
+        steps: ['Asignaci\u00f3n', 'Recolecci\u00f3n', 'Reparaci\u00f3n', 'Devoluci\u00f3n', 'Facturaci\u00f3n', 'Baja']
+      },
+      {
+        label: 'Pruebas',
+        paras: [
+          'Valid\u00e9 los flujos principales mediante pruebas de prototipo y revisiones con stakeholders, enfoc\u00e1ndome en tareas comunes como buscar equipos, filtrar inventario, actualizar informaci\u00f3n y revisar el estado de los activos.',
+          'Las pruebas ayudaron a identificar terminolog\u00eda poco clara, jerarqu\u00eda de informaci\u00f3n mejorable y pasos innecesarios.',
+          'Iter\u00e9 sobre esos flujos antes del handoff, simplificando interacciones y haciendo m\u00e1s accesibles las acciones frecuentes.',
+          'El objetivo era que el producto siguiera siendo \u00fatil para el trabajo operativo diario y a la vez soportara escenarios de inventario m\u00e1s complejos.'
+        ]
+      }
+    ],
+    outcomeLead: 'Centralizar m\u00e1s de 5,000 equipos en una sola fuente de verdad',
+    stats: [
+      { v: '30%', l: 'm\u00e1s r\u00e1pido completar tareas' },
+      { v: '25%', l: 'mayor satisfacci\u00f3n de usuario' },
+      { v: '70%', l: 'aumento en trazabilidad' }
+    ],
+    outcome: [
+      'Al centralizar la informaci\u00f3n del inventario y simplificar los flujos clave, la plataforma permiti\u00f3 a los equipos acceder m\u00e1s r\u00e1pido a la informaci\u00f3n y completar tareas diarias con menos pasos.',
+      'La velocidad para completar tareas aument\u00f3 un 30% y la satisfacci\u00f3n de usuario mejor\u00f3 un 25%.',
+      'Una mejor visibilidad sobre responsables, ubicaci\u00f3n, estado e historial tambi\u00e9n contribuy\u00f3 a un aumento del 70% en la trazabilidad del ciclo de vida del inventario.',
+      'El redise\u00f1o cre\u00f3 una herramienta operativa m\u00e1s confiable y sent\u00f3 una base escalable para gestionar un ecosistema de equipos en crecimiento.'
+    ]
+  },
+  vrfi: {
+    timeline: '3 meses',
+    cardTitle: 'Plataforma de Reclutamiento de Personal',
+    title: 'Plataforma de Reclutamiento de Personal',
+    eyebrow: 'VRFI \u00b7 SaaS de reclutamiento',
+    subtitle: 'Dise\u00f1ar una experiencia de contrataci\u00f3n conectada para empleadores, agencias de personal y candidatos.',
+    blurb: 'Simplificar la contrataci\u00f3n temporal, el cumplimiento y la coordinaci\u00f3n entre m\u00faltiples actores.',
+    tags: ['Dise\u00f1o de Producto', 'SaaS', 'Cumplimiento'],
+    cardStats: [{ v: '30% \u2193', l: 'tiempo de contrataci\u00f3n' }, { v: '40% \u2193', l: 'incidencias de cumplimiento' }],
+    role: 'Dise\u00f1o de Producto \u00b7 Investigaci\u00f3n UX \u00b7 Arquitectura de Producto \u00b7 Prototipado',
+    overview: [
+      'VRFI es una plataforma de reclutamiento dise\u00f1ada para coordinar la contrataci\u00f3n de personal temporal entre empleadores, agencias de personal y candidatos.',
+      'El producto deb\u00eda soportar distintos usuarios, responsabilidades y necesidades de informaci\u00f3n manteniendo a todos conectados al mismo proceso de contrataci\u00f3n.'
+    ],
+    sections: [
+      {
+        label: 'El reto',
+        lead: 'Un proceso, m\u00faltiples actores',
+        paras: [
+          'Los empleadores necesitaban visibilidad del avance de la contrataci\u00f3n, las agencias coordinar candidatos y colocaciones, y los candidatos informaci\u00f3n clara sobre oportunidades y siguientes pasos.',
+          'El reto era dar soporte a las tres perspectivas sin crear tres experiencias desconectadas.'
+        ]
+      },
+      {
+        label: 'Tres usuarios, un solo flujo',
+        paras: [
+          'Mape\u00e9 el recorrido de contrataci\u00f3n desde las tres perspectivas para entender d\u00f3nde se superpon\u00eda la informaci\u00f3n, d\u00f3nde se romp\u00eda la coordinaci\u00f3n y qu\u00e9 partes del proceso deb\u00edan permanecer conectadas.',
+          'La experiencia se estructur\u00f3 alrededor de un flujo compartido con vistas, permisos y acciones espec\u00edficas por rol.'
+        ],
+        roles: [
+          { k: 'Empleador', t: 'Gestionar vacantes', img: 'assets/vrfi-employer-jobs-v2.png' },
+          { k: 'Agencia', t: 'Coordinar candidatos', img: 'assets/vrfi-agency-candidates-v2.png' },
+          { k: 'Candidato', t: 'Seguir oportunidades', img: 'assets/vrfi-candidate-tracking-v2.png' }
+        ]
+      },
+      {
+        label: 'Enfoque de dise\u00f1o',
+        lead: 'Dise\u00f1ar alrededor del flujo de contrataci\u00f3n compartido',
+        paras: [
+          'El MVP se enfoc\u00f3 en la gesti\u00f3n de vacantes, la coordinaci\u00f3n de candidatos, el estado de contrataci\u00f3n y la colaboraci\u00f3n entre empleador y agencia.',
+          'Patrones reutilizables de estado, acciones y permisos por rol ayudaron a mantener la experiencia consistente a medida que los usuarios avanzaban por el proceso.'
+        ]
+      }
+    ],
+    outcomeLead: 'Contrataci\u00f3n m\u00e1s r\u00e1pida sin sacrificar el cumplimiento',
+    stats: [
+      { v: '30% \u2193', l: 'tiempo de contrataci\u00f3n' },
+      { v: '40% \u2193', l: 'incidencias de cumplimiento' },
+      { v: '3', l: 'grupos de actores alineados' }
+    ],
+    outcome: [
+      'Al reunir a empleadores, agencias y candidatos en un flujo conectado, la plataforma redujo la coordinaci\u00f3n manual y mejor\u00f3 la visibilidad de todo el proceso de contrataci\u00f3n.'
+    ]
+  }
+};
+
+const UI = {
+  en: {
+    home: 'Home', projects: 'Projects', about: 'About', contact: 'Contact',
+    heroEyebrow: 'UX Strategy • Product Design • Data-informed Design',
+    heroTitle: "Hi, I'm Fiorella",
+    heroLeadA: 'I design digital products that turn ', heroLeadB: 'complex workflows', heroLeadC: ' into clear, scalable experiences.',
+    heroSub: 'Senior Product Designer based in Toronto with 7+ years of experience designing SaaS platforms, operational tools and data-informed experiences.',
+    ctaWork: 'See my work', ctaAbout: 'About me',
+    selectedWork: 'SELECTED WORK', projectsTitle: 'Projects',
+    viewCase: 'View case study \u2192', livePrototype: 'Live prototype \u2197',
+    homeAboutLoc: 'Toronto, Canada', homeAboutTitle: 'About me',
+    homeAboutP1: "Based in Toronto, I'm a Senior Product Designer focused on creating intuitive solutions that streamline workflows, enhance compliance and simplify complex processes.",
+    homeAboutP2: 'I lean on data and analytics to drive smarter, faster business decisions while making user experiences more efficient and accessible.',
+    moreAbout: 'More about me \u2192',
+    aboutTitle: 'Behind the Screens',
+    aboutP1: 'I\u2019m a Product Designer based in Toronto with over 7 years of experience designing digital products, SaaS platforms, and operational tools. My background in visual design shaped a strong attention to hierarchy, systems, and interface quality, while my work today focuses on solving complex product and workflow problems.',
+    aboutP2: 'I\u2019m most interested in products where design has to balance user needs, business goals, technical constraints, and operational realities. I use research, product data, and close collaboration with engineering and stakeholders to define the right problems, prioritize opportunities, and turn complex processes into clear, scalable experiences.',
+    aboutP3: 'I enjoy working through ambiguity, connecting insights across teams, and thinking beyond individual screens to understand how a product works as a system. Outside of work, I\u2019m usually experimenting with new ideas, learning new tools, cooking, or sketching whatever catches my attention.',
+    allProjects: '\u2190 All projects', projectOverview: 'Project overview', role: 'Role', tools: 'Tools', timeline: 'Timeline',
+    solution: 'Solution', outcome: 'Outcome', liveDemo: 'Live demo',
+    exploreProto: 'Explore the live prototype', viewProto: 'View prototype \u2197', viewLiveProto: 'View live prototype \u2197',
+    nextProject: 'Next project',
+    footerCta: "Let's get in touch", emailMe: 'Email me',
+    rights: '\u00a92025 All Rights Reserved \u2014 Fiorella Donayre',
+    capabilities: [
+      { k: 'Research', v: 'User interviews, usability testing, journey mapping' },
+      { k: 'Product Thinking', v: 'Problem framing, prioritization, workflow design' },
+      { k: 'Systems', v: 'Design systems, scalable patterns, complex product flows' },
+      { k: 'Delivery', v: 'Prototypes, developer handoff, cross-functional collaboration' }
+    ]
+  },
+  es: {
+    home: 'Inicio', projects: 'Proyectos', about: 'Sobre mí', contact: 'Contacto',
+    heroEyebrow: 'Estrategia UX • Dise\u00f1o de Producto • Dise\u00f1o basado en datos',
+    heroTitle: 'Hola, soy Fiorella',
+    heroLeadA: 'Dise\u00f1o productos digitales que convierten ', heroLeadB: 'flujos de trabajo complejos', heroLeadC: ' en experiencias claras y escalables.',
+    heroSub: 'Product Designer Senior radicada en Toronto con m\u00e1s de 7 a\u00f1os de experiencia dise\u00f1ando plataformas SaaS, herramientas operativas y experiencias basadas en datos.',
+    ctaWork: 'Ver mi trabajo', ctaAbout: 'Sobre m\u00ed',
+    selectedWork: 'TRABAJO SELECCIONADO', projectsTitle: 'Proyectos',
+    viewCase: 'Ver caso de estudio \u2192', livePrototype: 'Prototipo en vivo \u2197',
+    homeAboutLoc: 'Toronto, Canad\u00e1', homeAboutTitle: 'Sobre m\u00ed',
+    homeAboutP1: 'Radicada en Toronto, soy Product Designer Senior enfocada en crear soluciones intuitivas que agilizan flujos de trabajo, refuerzan el cumplimiento normativo y simplifican procesos complejos.',
+    homeAboutP2: 'Me apoyo en datos y anal\u00edtica para impulsar decisiones de negocio m\u00e1s inteligentes y r\u00e1pidas, haciendo la experiencia de usuario m\u00e1s eficiente y accesible.',
+    moreAbout: 'M\u00e1s sobre m\u00ed \u2192',
+    aboutTitle: 'Detr\u00e1s de las pantallas',
+    aboutP1: 'Soy Product Designer radicada en Toronto con m\u00e1s de 7 a\u00f1os de experiencia dise\u00f1ando productos digitales, plataformas SaaS y herramientas operativas. Mi formaci\u00f3n en dise\u00f1o visual me dio una atenci\u00f3n especial a la jerarqu\u00eda, los sistemas y la calidad de la interfaz, mientras que hoy mi trabajo se centra en resolver problemas complejos de producto y de flujo de trabajo.',
+    aboutP2: 'Me interesan sobre todo los productos donde el dise\u00f1o tiene que equilibrar las necesidades del usuario, los objetivos del negocio, las restricciones t\u00e9cnicas y la realidad operativa. Uso investigaci\u00f3n, datos de producto y colaboraci\u00f3n cercana con ingenier\u00eda y stakeholders para definir los problemas correctos, priorizar oportunidades y convertir procesos complejos en experiencias claras y escalables.',
+    aboutP3: 'Disfruto trabajar en la ambig\u00fcedad, conectar hallazgos entre equipos y pensar m\u00e1s all\u00e1 de pantallas individuales para entender c\u00f3mo funciona un producto como sistema. Fuera del trabajo suelo estar experimentando con ideas nuevas, aprendiendo herramientas, cocinando o dibujando lo que me llame la atenci\u00f3n.',
+    allProjects: '\u2190 Todos los proyectos', projectOverview: 'Resumen del proyecto', role: 'Rol', tools: 'Herramientas', timeline: 'Duraci\u00f3n',
+    solution: 'Soluci\u00f3n', outcome: 'Resultados', liveDemo: 'Demo en vivo',
+    exploreProto: 'Explora el prototipo en vivo', viewProto: 'Ver prototipo \u2197', viewLiveProto: 'Ver prototipo en vivo \u2197',
+    nextProject: 'Siguiente proyecto',
+    footerCta: 'Hablemos', emailMe: 'Escr\u00edbeme',
+    rights: '\u00a92025 Todos los derechos reservados \u2014 Fiorella Donayre',
+    capabilities: [
+      { k: 'Investigaci\u00f3n', v: 'Entrevistas con usuarios, pruebas de usabilidad, journey mapping' },
+      { k: 'Visi\u00f3n de producto', v: 'Definici\u00f3n del problema, priorizaci\u00f3n, dise\u00f1o de flujos' },
+      { k: 'Sistemas', v: 'Sistemas de dise\u00f1o, patrones escalables, flujos de producto complejos' },
+      { k: 'Entrega', v: 'Prototipos, handoff a desarrollo, colaboraci\u00f3n multidisciplinaria' }
+    ]
+  }
+};
+
+
 class Component extends DCLogic {
-  state = { route: 'home', pid: 'ecom' };
+  state = { route: 'home', pid: 'ecom', lang: (typeof localStorage !== 'undefined' && localStorage.getItem('fd-lang')) || 'en' };
+
+  toggleMenu = () => this.setState((s) => ({ menuOpen: !s.menuOpen }));
+  closeMenu = () => { if (this.state.menuOpen) this.setState({ menuOpen: false }); };
+
+  barStyle(kind) {
+    const open = !!this.state.menuOpen;
+    const base = { position: 'absolute', width: '17px', height: '1.5px', background: '#000', borderRadius: '2px', transition: 'transform .25s ease, opacity .2s ease' };
+    if (kind === 'top') return Object.assign({}, base, { transform: open ? 'rotate(45deg)' : 'translateY(-5px)' });
+    if (kind === 'bot') return Object.assign({}, base, { transform: open ? 'rotate(-45deg)' : 'translateY(5px)' });
+    return Object.assign({}, base, { opacity: open ? 0 : 1 });
+  }
+
+  setLang = (lang) => () => {
+    this.setState({ lang });
+    try { localStorage.setItem('fd-lang', lang); } catch (e) {}
+  };
+
+  langStyle(active) {
+    return {
+      border: 'none',
+      cursor: 'pointer',
+      fontFamily: 'Inter, system-ui, sans-serif',
+      fontSize: '11px',
+      letterSpacing: '.07em',
+      fontWeight: 500,
+      padding: '4px 9px',
+      borderRadius: '999px',
+      transition: 'background .18s ease, color .18s ease',
+      background: active ? '#fffdfe' : 'transparent',
+      color: active ? '#542eeb' : 'rgba(255,253,254,.72)'
+    };
+  }
 
   go = (route, pid) => (e) => {
     if (e) e.preventDefault();
@@ -836,31 +1309,51 @@ class Component extends DCLogic {
 
   renderVals() {
     const route = this.state.route;
-    const base = PROJECTS.find((p) => p.id === this.state.pid) || PROJECTS[0];
+    const L = this.state.lang === 'es' ? 'es' : 'en';
+    const ui = UI[L];
+    const tr = (p) => (L === 'es' && ES_PROJECTS[p.id]) ? Object.assign({}, p, ES_PROJECTS[p.id]) : p;
+    const base = tr(PROJECTS.find((p) => p.id === this.state.pid) || PROJECTS[0]);
     const cs = Object.assign({}, base, { statLead: base.stats[0], statRest: base.stats.slice(1), noHero: !base.hero, hasSections: !!(base.sections && base.sections.length), sections: base.sections || [], showSolution: !(base.sections && base.sections.length), statCols: 'repeat(' + Math.min(3, Math.max(1, base.stats.length - 1)) + ',minmax(0,1fr))' });
-    const next = PROJECTS[(PROJECTS.indexOf(base) + 1) % PROJECTS.length];
+    const bi = PROJECTS.findIndex((p) => p.id === base.id);
+    const next = tr(PROJECTS[(bi + 1) % PROJECTS.length]);
     return {
       isHome: route === 'home',
       isAbout: route === 'about',
       isCase: route === 'case',
       goHome: this.go('home'),
+      t: ui,
+      isEn: L === 'en',
+      isEs: L === 'es',
+      setEn: this.setLang('en'),
+      setEs: this.setLang('es'),
+      enStyle: this.langStyle(L === 'en'),
+      esStyle: this.langStyle(L === 'es'),
       goAbout: this.go('about'),
       goWork: this.go('work'),
+      menuOpen: !!this.state.menuOpen,
+      navLinksClass: this.state.menuOpen ? 'navlinks navlinks-open' : 'navlinks',
+      toggleMenu: this.toggleMenu,
+      closeMenu: this.closeMenu,
+      goHomeMenu: (e) => { this.closeMenu(); this.go('home')(e); },
+      goWorkMenu: (e) => { this.closeMenu(); this.go('work')(e); },
+      goAboutMenu: (e) => { this.closeMenu(); this.go('about')(e); },
+      burgerTop: this.barStyle('top'),
+      burgerMid: this.barStyle('mid'),
+      burgerBot: this.barStyle('bot'),
       navRef: (el) => { this.navEl = el; if (el && this._onScroll) this._onScroll(); },
       nextCase: this.go('case', next.id),
       nextTitle: next.cardTitle,
       cs,
-      projects: PROJECTS.map((p) => Object.assign({}, p, {
+      projects: PROJECTS.map(tr).map((p) => Object.assign({}, p, {
         open: this.go('case', p.id),
         noThumb: !p.thumb,
+        thumbStyle: {
+          width: '100%', height: '100%', maxWidth: '100%', objectFit: 'cover', display: 'block',
+          transform: 'scale(' + (p.id === 'ecom' ? 1.02 : 1.22) + ')', transformOrigin: 'center'
+        },
         openDemo: p.demo ? (e) => { e.preventDefault(); e.stopPropagation(); window.open(p.demo, '_blank', 'noopener'); } : null
       })),
-      capabilities: [
-        { k: 'Research', v: 'User interviews, usability testing, journey mapping' },
-        { k: 'Product Thinking', v: 'Problem framing, prioritization, workflow design' },
-        { k: 'Systems', v: 'Design systems, scalable patterns, complex product flows' },
-        { k: 'Delivery', v: 'Prototypes, developer handoff, cross-functional collaboration' }
-      ]
+      capabilities: ui.capabilities
     };
   }
 }
